@@ -9,6 +9,10 @@
   },
   "author": "srigar s",
   "license": "MIT",
+  "peerDependencies": {
+    "type": "git",
+    "url": "https://github.com/srigar/multiselect-react-dropdown"
+  },
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
