@@ -194,12 +194,11 @@ export class Multiselect extends Component {
   onSelectItem(item) {
     const { selectedValues, showCheckbox } = this.state;
     const { selectionLimit, onSelect } = this.props;
-    if (selectionLimit == selectedValues.length) {
-      return;
-    }
-
     if (this.isSelectedValue(item)) {
       this.onRemoveSelectedItem(item);
+      return;
+    }
+    if (selectionLimit == selectedValues.length) {
       return;
     }
 		selectedValues.push(item);
