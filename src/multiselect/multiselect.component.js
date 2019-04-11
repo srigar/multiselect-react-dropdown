@@ -304,7 +304,7 @@ export class Multiselect extends Component {
   }
 
   isDisablePreSelectedValues(value) {
-    const { isObject, disablePreSelectedValues } = this.props;
+    const { isObject, disablePreSelectedValues, displayValue } = this.props;
     const { preSelectedValues } = this.state;
     if (!disablePreSelectedValues || !preSelectedValues.length) {
       return false;
@@ -325,7 +325,7 @@ export class Multiselect extends Component {
       return false;
     }
 
-    if (selectionLimit !== selectedValues.length) {
+    if (selectionLimit != selectedValues.length) {
       return false;
     }
 
