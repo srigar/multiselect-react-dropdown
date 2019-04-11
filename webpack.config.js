@@ -1,13 +1,22 @@
+var webpack = require('webpack');
 const path = require("path");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: "./src/multiselect/multiselect.component.js",
-  mode: "development",
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: "index.js",
     libraryTarget: 'commonjs2'
   },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 7000,
+    watchContentBase: true,
+    progress: true
+  },
+  mode: "production",
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -34,6 +43,19 @@ module.exports = {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
         loader: 'url-loader?limit=100000' 
       }
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: false,
+        parallel: true,
+        uglifyOptions: {
+          compress: true,
+          ecma: 6,
+          mangle: true
+        }
+      })
     ]
   },
   externals: {

@@ -4,7 +4,7 @@
 
 ## Description   
 
-A React component providing multi select functionality with various features like selection limit, CSS customization, checkbox, search option, disable preselected values, render normal array(not an object), keyboard navigation and grouping features.
+A React component providing multi select functionality with various features like selection limit, CSS customization, checkbox, search option, disable preselected values, flat array options, keyboard navigation and grouping features.
 
 ![Multiselect](images/dd.png)
 
@@ -58,7 +58,7 @@ onRemove(optionList, removedItem) {
 | `selectionLimit` | `number` | `-1` | You can limit the number of items that can be selected in a dropdown
 | `placeholder` | `string` | `Select` | Placeholder text
 | `disablePreSelectedValues` | `bool` | `false` | Prevent to deselect the preselected values
-| `isObject` | `bool` | `true` | Make it false to display array of string or number `Ex. ['Test1',1]`
+| `isObject` | `bool` | `true` | Make it false to display flat array of string or number `Ex. ['Test1',1]`
 | `displayValue` | `string` | `value` | Property name in the object to display in the dropdown. Refer `Basic Usage` section
 | `emptyRecordMsg` | `string` | `No options available` | Message to display when no records found
 | `groupBy` | `string` | `''` | Group the popup list items with the corresponding category by the property name in the object
@@ -94,6 +94,7 @@ onRemove(optionList, removedItem) {
   }
 }
 ```
+
 ## 6. Close Icons
 | Name  | Image  |
 |:--------- | :---- |
