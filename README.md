@@ -1,20 +1,26 @@
 # MULTISELECT-REACT-DROPDOWN 
 
-## Description  
+![PRs](images/pr.png) ![License](images/license.png) ![Build](images/build.png)
+
+## Description   
 
 A React component providing multi select functionality with various features like selection limit, CSS customization, checkbox, search option, disable preselected values, render normal array(not an object), keyboard navigation and grouping features.
+
 ![Multiselect](images/dd.png)
-----
-## Installation
+
+
+## Getting Started
+
+## 1. Installation
 ```
 npm install multiselect-react-dropdown
 ```
 ----
-## Demo
+## 2. Demo
 [React-multi-select-dropdown](https://codesandbox.io/s/10xn41w767)
 
 ----
-## 1. Basic Usage
+## 3. Basic Usage
 ```js
 import { Multiselect } from 'multiselect-react-dropdown';
 
@@ -40,7 +46,7 @@ onRemove(optionList, removedItem) {
 ```
 ----
 
-## 2. Props
+## 4. Props
 
 | Prop  | Type  | Default | Description |
 |:--------- | :---- | :----   |:----  |
@@ -59,7 +65,7 @@ onRemove(optionList, removedItem) {
 | `closeIcon` | `string` | `circle` | Option to select close icon instead of default. Refer `Close Icon` section
 | `style` | `object` | `{}` | CSS Customization for multiselect. Refer below object for css customization.
 
-## 3. CSS Customization   
+## 5. CSS Customization   
 
 ```css
 {
@@ -88,12 +94,13 @@ onRemove(optionList, removedItem) {
   }
 }
 ```
-## 4. Close Icons
+## 6. Close Icons
 | Name  | Image  |
 |:--------- | :---- |
 | `circle` | ![Close Icon](images/circle.png) |
 | `circle2` | ![Close Icon](images/circle2.png) |
 | `cancel` | ![Close Icon](images/cancel.png) |
 | `close` | ![Close Icon](images/close.png) |
-## Licence
+
+## 7. Licence
 MIT
