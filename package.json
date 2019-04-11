@@ -1,6 +1,6 @@
 {
   "name": "multiselect-react-dropdown",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React multiselect dropdown",
   "main": "build/index.js",
   "scripts": {
@@ -9,11 +9,11 @@
   },
   "author": "srigar s",
   "license": "MIT",
-  "peerDependencies": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/srigar/multiselect-react-dropdown"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   },
