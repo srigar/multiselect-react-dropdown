@@ -17,7 +17,7 @@ npm install multiselect-react-dropdown
 ```
 ----
 ## 2. Demo
-[React-multi-select-dropdown](https://codesandbox.io/s/10xn41w767)
+[React-multi-select-dropdown](https://10xn41w767.codesandbox.io/)
 
 ----
 ## 3. Basic Usage
