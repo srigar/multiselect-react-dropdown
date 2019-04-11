@@ -1,6 +1,7 @@
-# REACT-MULTI-SELECT-DROPDOWN(DD)  
+# MULTISELECT-REACT-DROPDOWN 
 
-## Description
+## Description  
+
 A React component providing multi select functionality with various features like selection limit, CSS customization, checkbox, search option, disable preselected values, render normal array(not an object), keyboard navigation and grouping features.
 ![Multiselect](images/dd.png)
 ----
