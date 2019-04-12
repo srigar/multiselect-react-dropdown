@@ -290,12 +290,10 @@ export class Multiselect extends Component {
     const { isObject = false, displayValue, style } = this.props;
     const { selectedValues, closeIconType } = this.state;
     return selectedValues.map((value, index) => (
-      <span className={`chip ${ms.chip}`} key={index} style={style['chips']}>
+      <span className={`chip ${ms.chip} ${this.isDisablePreSelectedValues(value) && ms.disableSelection}`} key={index} style={style['chips']}>
         {!isObject ? value.toString() : value[displayValue]}
         <i
-          className={`icon_cancel ${ms[closeIconType]} ${
-            ms.closeIcon
-          } ${this.isDisablePreSelectedValues(value) && ms.disableSelection}`}
+          className={`icon_cancel ${ms[closeIconType]} ${ms.closeIcon}`}
           onClick={() => this.onRemoveSelectedItem(value)}
         />
       </span>

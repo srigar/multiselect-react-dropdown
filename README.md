@@ -44,6 +44,7 @@ onRemove(optionList, removedItem) {
     ...
 }
 ```
+
 ----
 
 ## 4. Props
@@ -51,8 +52,8 @@ onRemove(optionList, removedItem) {
 | Prop  | Type  | Default | Description |
 |:--------- | :---- | :----   |:----  |
 | `options` | `array` | `[]` | Dropdown options
-| `onSelect` | `function` | `func` | Callback function will invoked on select event
-| `onRemove` | `function` | `func` | Callback function will invoked on remove event
+| `onSelect` | `function` | `func` | Callback function will invoked on select event. Params are selectedList & selectedItem
+| `onRemove` | `function` | `func` | Callback function will invoked on remove event. Params are selectedList & removedItem
 | `selectedvalues` | `array` | `[]` | Preselected value to persist in dropdown
 | `showCheckbox` | `bool` | `false` | To display checkbox option in the dropdown
 | `selectionLimit` | `number` | `-1` | You can limit the number of items that can be selected in a dropdown
@@ -64,6 +65,8 @@ onRemove(optionList, removedItem) {
 | `groupBy` | `string` | `''` | Group the popup list items with the corresponding category by the property name in the object
 | `closeIcon` | `string` | `circle` | Option to select close icon instead of default. Refer `Close Icon` section
 | `style` | `object` | `{}` | CSS Customization for multiselect. Refer below object for css customization.
+
+----
 
 ## 5. CSS Customization   
 
@@ -89,11 +92,13 @@ onRemove(optionList, removedItem) {
   option: { // To change css for dropdown options
 	color: blue;
   },
-  groupHeading: { // To chanage heading style for grouping features
+  groupHeading: { // To chanage group heading style
 	....
   }
 }
 ```
+
+----
 
 ## 6. Close Icons
 | Name  | Image  |
@@ -102,6 +107,8 @@ onRemove(optionList, removedItem) {
 | `circle2` | ![Close Icon](images/circle2.png) |
 | `cancel` | ![Close Icon](images/cancel.png) |
 | `close` | ![Close Icon](images/close.png) |
+
+----
 
 ## 7. Licence
 MIT
