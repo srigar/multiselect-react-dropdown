@@ -1,6 +1,6 @@
 # MULTISELECT-REACT-DROPDOWN 
 
-![PRs](images/pr.png) ![License](images/license.png) ![Build](images/build.png)
+![Version](https://img.shields.io/npm/v/multiselect-react-dropdown.svg) ![Downloads](https://img.shields.io/npm/dw/multiselect-react-dropdown.svg) ![License](https://img.shields.io/npm/l/multiselect-react-dropdown.svg) ![PRs](images/pr.png) ![Build](images/build.png) ![Tweet](https://img.shields.io/twitter/url/https/twitter.com/ssrigar.svg?style=social)
 
 ## Description   
 
