@@ -101,12 +101,13 @@ onRemove(optionList, removedItem) {
 ----
 
 ## 6. Close Icons
+
 | Name  | Image  |
 |:--------- | :---- |
-| `circle` | ![Close Icon](images/circle.png) |
-| `circle2` | ![Close Icon](images/circle2.png) |
-| `cancel` | ![Close Icon](images/cancel.png) |
-| `close` | ![Close Icon](images/close.png) |
+| `circle` | ![Close Icon](images/circle.png)
+| `circle2` | ![Close Icon](images/circle2.png)
+| `cancel` | ![Close Icon](images/cancel.png)
+| `close` | ![Close Icon](images/close.png)
 
 ----
 
