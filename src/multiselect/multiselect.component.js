@@ -52,13 +52,15 @@ export class Multiselect extends Component {
 		if (groupBy && showCheckbox) {
 			this.groupByOptions(options);
 		}
-    this.searchWrapper.current.addEventListener("click", () => {
-			this.searchBox.current.focus();
-    });
+    this.searchWrapper.current.addEventListener("click", listenerCallback);
+  }
+
+  listenerCallback() {
+    this.searchBox.current.focus();
   }
 
   componentWillUnmount() {
-    this.searchWrapper.current.removeEventListener();
+    this.searchWrapper.current.removeEventListener('click', listenerCallback);
   }
 
   // Skipcheck flag - value will be true when the func called from on deselect anything.
