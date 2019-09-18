@@ -41,6 +41,7 @@ export class Multiselect extends Component {
     this.isDisablePreSelectedValues = this.isDisablePreSelectedValues.bind(this);
     this.renderGroupByOptions = this.renderGroupByOptions.bind(this);
     this.renderNormalOption = this.renderNormalOption.bind(this);
+    this.listenerCallback = this.listenerCallback.bind(this);
   }
 
   componentDidMount() {
@@ -52,7 +53,7 @@ export class Multiselect extends Component {
 		if (groupBy && showCheckbox) {
 			this.groupByOptions(options);
 		}
-    this.searchWrapper.current.addEventListener("click", listenerCallback);
+    this.searchWrapper.current.addEventListener("click", this.listenerCallback);
   }
 
   listenerCallback() {
@@ -60,7 +61,7 @@ export class Multiselect extends Component {
   }
 
   componentWillUnmount() {
-    this.searchWrapper.current.removeEventListener('click', listenerCallback);
+    this.searchWrapper.current.removeEventListener('click', this.listenerCallback);
   }
 
   // Skipcheck flag - value will be true when the func called from on deselect anything.
