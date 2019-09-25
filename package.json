@@ -1,7 +1,7 @@
 {
   "name": "multiselect-react-dropdown",
   "version": "1.2.2",
-  "description": "React multiselect dropdown",
+  "description": "React multiselect dropdown component with search and various features",
   "main": "build/index.js",
   "scripts": {
     "dev": "webpack-dev-server",
@@ -46,6 +46,8 @@
     "list",
     "autocomplete",
     "multiselect-react-dropdown",
-    "react-multiselect-dropdown"
+    "react-multiselect-dropdown",
+    "multiselect react dropdown",
+    "react multiselect dropdown"
   ]
 }
