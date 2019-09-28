@@ -1,10 +1,10 @@
-# MULTISELECT-REACT-DROPDOWN 
+# REACT MULTISELECT DROPDOWN 
 
-![Version](https://img.shields.io/npm/v/multiselect-react-dropdown.svg) ![Downloads](https://img.shields.io/npm/dw/multiselect-react-dropdown.svg) ![License](https://img.shields.io/npm/l/multiselect-react-dropdown.svg) ![PRs](images/pr.png) ![Build](images/build.png) ![Tweet](https://img.shields.io/twitter/url/https/twitter.com/ssrigar.svg?style=social)
+![Version](https://img.shields.io/npm/v/multiselect-react-dropdown.svg) ![Downloads](https://img.shields.io/npm/dw/multiselect-react-dropdown.svg) ![License](https://img.shields.io/npm/l/multiselect-react-dropdown.svg) ![PRs](images/pr.png) ![Tweet](https://img.shields.io/twitter/url/https/twitter.com/ssrigar.svg?style=social)
 
 ## Description   
 
-A React component providing multi select functionality with various features like selection limit, CSS customization, checkbox, search option, disable preselected values, flat array options, keyboard navigation and grouping features. Also it has feature to behave like normal dropdown(means single select dropdown).
+A React component which provides multi select functionality with various features like selection limit, CSS customization, checkbox, search option, disable preselected values, flat array, keyboard navigation for accessibility and grouping features. Also it has feature to behave like normal dropdown(means single select dropdown).
 
 ![Multiselect](images/dd.png)
 
