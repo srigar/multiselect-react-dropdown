@@ -33,7 +33,7 @@ options={this.state.options} // Options to display in the dropdown
 selectedvalues={this.state.selectedValue} // Preselected value to persist in dropdown
 onSelect={this.onSelect} // Function will trigger on select event
 onRemove={this.onRemove} // Function will trigger on remove event
-displayValue="name" // Property name to display in the dropdown
+displayValue="name" // Property name to display in the dropdown options
 />
 
 onSelect(optionsList, selectedItem) {
