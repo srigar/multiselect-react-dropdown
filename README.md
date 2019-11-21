@@ -73,7 +73,7 @@ onRemove(optionList, removedItem) {
 
 ```css
 {
-  multiselectConatiner: { // To change css for multiselect (Width,height,etc..)
+  multiselectContainer: { // To change css for multiselect (Width,height,etc..)
 	....
   },
   searchBox: { // To change search box element look
