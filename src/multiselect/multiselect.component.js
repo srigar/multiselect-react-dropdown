@@ -362,7 +362,7 @@ export class Multiselect extends Component {
     const { inputValue, toggleOptionsList, selectedValues } = this.state;
     const { placeholder, style, singleSelect } = this.props;
     return (
-      <div className={ms.multiSelectContainer} id="multiselectContainerReact" style={style['multiselectConatiner']}>
+      <div className={ms.multiSelectContainer} id="multiselectContainerReact" style={style['multiselectContainer']}>
         <div className={`${ms.searchWarpper} ${singleSelect ? ms.singleSelect : ''}`} 
           ref={this.searchWrapper} style={style['searchBox']} 
           onClick={singleSelect ? this.toggelOptionList : () => {}}
