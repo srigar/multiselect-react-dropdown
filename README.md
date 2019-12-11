@@ -55,7 +55,7 @@ onRemove(optionList, removedItem) {
 | `onSelect` | `function` | `func` | Callback function will invoked on select event. Params are selectedList & selectedItem
 | `onRemove` | `function` | `func` | Callback function will invoked on remove event. Params are selectedList & removedItem
 | `singleSelect` | `boolean` | `false` | Make it `true` to behave like a normal dropdown(single select dropdown)
-| `selectedvalues` | `array` | `[]` | Preselected value to persist in dropdown
+| `selectedValues` | `array` | `[]` | Preselected value to persist in dropdown
 | `showCheckbox` | `bool` | `false` | To display checkbox option in the dropdown
 | `selectionLimit` | `number` | `-1` | You can limit the number of items that can be selected in a dropdown
 | `placeholder` | `string` | `Select` | Placeholder text
