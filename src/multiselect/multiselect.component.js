@@ -124,14 +124,19 @@ export class Multiselect extends Component {
     let { options, filteredOptions, inputValue } = this.state;
     const { isObject, displayValue } = this.props;
     if (isObject) {
-      options = filteredOptions.filter(
-        i => i[displayValue].indexOf(inputValue) > -1
-      );
+      options = filteredOptions.filter(i => this.matchValues(i[displayValue], inputValue))
     } else {
-      options = filteredOptions.filter(i => i.indexOf(inputValue) > -1);
+      options = filteredOptions.filter(i => this.matchValues(i, inputValue));
     }
     this.groupByOptions(options);
     this.setState({ options });
+  }
+
+  matchValues(value, search) {
+    if (this.props.caseSensitiveSearch) {
+      return value.toLowerCase().indexOf(search.toLowerCase()) > -1;
+    }
+    return value.indexOf(search) > -1;
   }
 
   onArrowKeyNavigation(e) {
@@ -416,5 +421,6 @@ Multiselect.defaultProps = {
 	onSelect: () => {},
   onRemove: () => {},
   closeIcon: 'circle2',
-  singleSelect: false
+  singleSelect: false,
+  caseSensitiveSearch: false
 };

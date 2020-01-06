@@ -66,6 +66,7 @@ onRemove(optionList, removedItem) {
 | `groupBy` | `string` | `''` | Group the popup list items with the corresponding category by the property name in the object
 | `closeIcon` | `string` | `circle` | Option to select close icon instead of default. Refer `Close Icon` section
 | `style` | `object` | `{}` | CSS Customization for multiselect. Refer below object for css customization.
+| `caseSensitiveSearch` | `bool` | `false` | Enables case sensitivity on the search field.
 
 ----
 
