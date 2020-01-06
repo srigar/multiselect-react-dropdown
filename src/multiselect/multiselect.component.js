@@ -134,9 +134,9 @@ export class Multiselect extends Component {
 
   matchValues(value, search) {
     if (this.props.caseSensitiveSearch) {
-      return value.toLowerCase().indexOf(search.toLowerCase()) > -1;
+      return value.indexOf(search) > -1;
     }
-    return value.indexOf(search) > -1;
+    return value.toLowerCase().indexOf(search.toLowerCase()) > -1;
   }
 
   onArrowKeyNavigation(e) {
