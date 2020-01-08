@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ms from "./multiselect.component.css";
 import "../assets/closeicon/css/fontello.css";
 
@@ -9,7 +9,7 @@ const closeIconTypes = {
   cancel: 'icon_cancel'
 };
 
-export class Multiselect extends Component {
+export class Multiselect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,8 +44,8 @@ export class Multiselect extends Component {
     this.listenerCallback = this.listenerCallback.bind(this);
   }
 
-  componentDidMount() {
-		const { showCheckbox, groupBy } = this.props;
+  initialSetValue() {
+    const { showCheckbox, groupBy } = this.props;
 		const { options } = this.state;
     if (!showCheckbox) {
       this.removeSelectedValuesFromOptions(false);
@@ -53,7 +53,22 @@ export class Multiselect extends Component {
 		if (groupBy && showCheckbox) {
 			this.groupByOptions(options);
 		}
+  }
+
+  componentDidMount() {
+		this.initialSetValue();
     this.searchWrapper.current.addEventListener("click", this.listenerCallback);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { options, selectedValues } = this.props;
+    const { options: prevOptions, selectedValues: prevSelectedvalues } = prevProps;
+    if (JSON.stringify(prevOptions) !== JSON.stringify(options)) {
+      this.setState({ options, filteredOptions: options, unfilteredOptions: options }, this.initialSetValue);
+    }
+    if (JSON.stringify(prevSelectedvalues) !== JSON.stringify(selectedValues)) {
+      this.setState({ selectedValues, preSelectedValues: selectedValues }, this.initialSetValue);
+    }
   }
 
   listenerCallback() {
@@ -181,8 +196,8 @@ export class Multiselect extends Component {
   }
 
   onRemoveSelectedItem(item) {
-		let { selectedValues, showCheckbox, index = 0, isObject } = this.state;
-		const { onRemove } = this.props;
+		let { selectedValues, index = 0, isObject } = this.state;
+		const { onRemove, showCheckbox } = this.props;
     if (isObject) {
       index = selectedValues.findIndex(
         i => i[displayValue] === item[displayValue]
@@ -200,8 +215,8 @@ export class Multiselect extends Component {
   }
 
   onSelectItem(item) {
-    const { selectedValues, showCheckbox } = this.state;
-    const { selectionLimit, onSelect, singleSelect } = this.props;
+    const { selectedValues } = this.state;
+    const { selectionLimit, onSelect, singleSelect, showCheckbox } = this.props;
     if (singleSelect) {
       this.onSingleSelect(item);
       onSelect([item], item);
