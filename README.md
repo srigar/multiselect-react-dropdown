@@ -67,6 +67,7 @@ onRemove(optionList, removedItem) {
 | `closeIcon` | `string` | `circle` | Option to select close icon instead of default. Refer `Close Icon` section
 | `style` | `object` | `{}` | CSS Customization for multiselect. Refer below object for css customization.
 | `caseSensitiveSearch` | `bool` | `false` | Enables case sensitivity on the search field.
+| `id` | `string` | `''` | Id for the input field.
 
 ----
 

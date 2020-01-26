@@ -380,7 +380,7 @@ export class Multiselect extends React.Component {
 
   renderMultiselectContainer() {
     const { inputValue, toggleOptionsList, selectedValues } = this.state;
-    const { placeholder, style, singleSelect } = this.props;
+    const { placeholder, style, singleSelect, id } = this.props;
     return (
       <div className={ms.multiSelectContainer} id="multiselectContainerReact" style={style['multiselectContainer']}>
         <div className={`${ms.searchWarpper} ${singleSelect ? ms.singleSelect : ''}`} 
@@ -391,7 +391,8 @@ export class Multiselect extends React.Component {
           <input
 						type="text"
 						ref={this.searchBox}
-						className="searchBox"
+            className="searchBox"
+            id={id}
             onChange={this.onChange}
             value={inputValue}
             onFocus={this.toggelOptionList}
@@ -437,5 +438,6 @@ Multiselect.defaultProps = {
   onRemove: () => {},
   closeIcon: 'circle2',
   singleSelect: false,
-  caseSensitiveSearch: false
+  caseSensitiveSearch: false,
+  id: ''
 };
