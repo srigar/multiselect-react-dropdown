@@ -45,9 +45,9 @@ export class Multiselect extends React.Component {
   }
 
   initialSetValue() {
-    const { showCheckbox, groupBy } = this.props;
+    const { showCheckbox, groupBy, singleSelect } = this.props;
 		const { options } = this.state;
-    if (!showCheckbox) {
+    if (!showCheckbox && !singleSelect) {
       this.removeSelectedValuesFromOptions(false);
 		} 
 		if (groupBy && showCheckbox) {
