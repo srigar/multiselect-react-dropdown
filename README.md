@@ -36,11 +36,11 @@ onRemove={this.onRemove} // Function will trigger on remove event
 displayValue="name" // Property name to display in the dropdown options
 />
 
-onSelect(optionsList, selectedItem) {
+onSelect(selectedList, selectedItem) {
     ...
 }
 
-onRemove(optionList, removedItem) {
+onRemove(selectedList, removedItem) {
     ...
 }
 ```
@@ -71,7 +71,38 @@ onRemove(optionList, removedItem) {
 
 ----
 
-## 5. CSS Customization   
+
+
+# 5. `Ref` as a prop
+
+By using React.createRef() or useRef(), able to access below methods to get or reset selected values
+
+| Method Name | Description |
+|:--------- | :----  |
+| `resetSelectedValues` | Programatically reset selected values
+| `getSelectedItems` | Get all selected items
+| `getSelectedItemsCount` | Get selected items count
+
+```js
+constructor() {
+  this.multiselectRef = React.createRef();
+}
+
+resetValues() {
+  // By calling the belowe method will reset the selected values programatically
+  this.multiselectRef.current.resetSelectedValues();
+}
+
+<Multiselect
+options={this.state.options} // Options to display in the dropdown
+ref={this.multiselectRef}
+/>
+
+```
+
+----
+
+## 6. CSS Customization   
 
 ```css
 {
@@ -103,7 +134,7 @@ onRemove(optionList, removedItem) {
 
 ----
 
-## 6. Close Icons
+## 7. Close Icons
 
 | Name  | Image  |
 |:--------- | :---- |
@@ -114,5 +145,5 @@ onRemove(optionList, removedItem) {
 
 ----
 
-## 7. Licence
+## 8. Licence
 MIT

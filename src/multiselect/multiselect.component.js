@@ -42,6 +42,9 @@ export class Multiselect extends React.Component {
     this.renderGroupByOptions = this.renderGroupByOptions.bind(this);
     this.renderNormalOption = this.renderNormalOption.bind(this);
     this.listenerCallback = this.listenerCallback.bind(this);
+    this.resetSelectedValues = this.resetSelectedValues.bind(this);
+    this.getSelectedItems = this.getSelectedItems.bind(this);
+    this.getSelectedItemsCount = this.getSelectedItemsCount.bind(this);
   }
 
   initialSetValue() {
@@ -53,6 +56,24 @@ export class Multiselect extends React.Component {
 		if (groupBy && showCheckbox) {
 			this.groupByOptions(options);
 		}
+  }
+
+  resetSelectedValues() {
+    const { unfilteredOptions } = this.state;
+    this.setState({
+      selectedValues: [],
+      preSelectedValues: [],
+      options: unfilteredOptions,
+      filteredOptions: unfilteredOptions
+    }, this.initialSetValue);
+  }
+
+  getSelectedItems() {
+    return this.state.selectedValues;
+  }
+
+  getSelectedItemsCount() {
+    return this.state.selectedValues.length;
   }
 
   componentDidMount() {
