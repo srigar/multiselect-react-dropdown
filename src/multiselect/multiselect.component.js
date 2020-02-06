@@ -20,7 +20,7 @@ export class Multiselect extends React.Component {
       selectedValues: Object.assign([], props.selectedValues),
       preSelectedValues: Object.assign([], props.selectedValues),
       toggleOptionsList: false,
-      highlightOption: 0,
+      highlightOption: -1,
 			showCheckbox: props.showCheckbox,
       groupedObject: [],
       closeIconType: closeIconTypes[props.closeIcon] || closeIconTypes['circle']
@@ -395,7 +395,7 @@ export class Multiselect extends React.Component {
   toggelOptionList() {
     this.setState({
       toggleOptionsList: !this.state.toggleOptionsList,
-      highlightOption: 0
+      highlightOption: -1
     });
   }
 
