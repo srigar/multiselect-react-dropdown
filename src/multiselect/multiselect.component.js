@@ -311,7 +311,7 @@ export class Multiselect extends React.Component {
 									checked={this.isSelectedValue(option)}
 								/>
 							)}
-							{isObject ? option[displayValue] : option.toString()}
+							{isObject ? option[displayValue] : (option || '').toString()}
 						</li>
 					))}
 				</React.Fragment>
@@ -339,7 +339,7 @@ export class Multiselect extends React.Component {
             checked={this.isSelectedValue(option)}
           />
         )}
-        {isObject ? option[displayValue] : option.toString()}
+        {isObject ? option[displayValue] : (option || '').toString()}
       </li>
     ));
   }
@@ -349,7 +349,7 @@ export class Multiselect extends React.Component {
     const { selectedValues, closeIconType } = this.state;
     return selectedValues.map((value, index) => (
       <span className={`chip ${ms.chip} ${singleSelect && ms.singleChip} ${this.isDisablePreSelectedValues(value) && ms.disableSelection}`} key={index} style={style['chips']}>
-        {!isObject ? value.toString() : value[displayValue]}
+        {!isObject ? (value || '').toString() : value[displayValue]}
         <i
           className={`icon_cancel ${ms[closeIconType]} ${ms.closeIcon}`}
           onClick={() => this.onRemoveSelectedItem(value)}
