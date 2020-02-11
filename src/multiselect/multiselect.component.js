@@ -257,6 +257,9 @@ export class Multiselect extends React.Component {
 				this.removeSelectedValuesFromOptions(true);
       }
     });
+    if (!this.props.closeOnSelect) {
+      this.searchBox.current.focus();
+    }
   }
 
   onSingleSelect(item) {
@@ -460,5 +463,6 @@ Multiselect.defaultProps = {
   closeIcon: 'circle2',
   singleSelect: false,
   caseSensitiveSearch: false,
-  id: ''
+  id: '',
+  closeOnSelect: true
 };

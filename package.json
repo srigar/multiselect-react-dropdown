@@ -1,6 +1,6 @@
 {
   "name": "multiselect-react-dropdown",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "React multiselect dropdown component with search and various features",
   "main": "build/index.js",
   "scripts": {
