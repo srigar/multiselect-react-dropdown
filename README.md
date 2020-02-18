@@ -69,6 +69,7 @@ onRemove(selectedList, removedItem) {
 | `caseSensitiveSearch` | `bool` | `false` | Enables case sensitivity on the search field.
 | `closeOnSelect` | `bool` | `true` | Dropdown get closed on select item.
 | `id` | `string` | `''` | Id for the input field.
+| `avoidHighlightFirstOption` | `bool` | `false` | Based on flag first option will get highlight whenever optionlist open.
 
 ----
 
