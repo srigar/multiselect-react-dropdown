@@ -206,6 +206,9 @@ export class Multiselect extends React.Component {
         this.setState({ highlightOption: 0 });
       }
     } else if (e.key === "Enter" && options.length && toggleOptionsList) {
+      if (highlightOption === -1) {
+        return;
+      }
       this.onSelectItem(options[highlightOption]);
     }
     setTimeout(() => {
@@ -238,6 +241,9 @@ export class Multiselect extends React.Component {
   onSelectItem(item) {
     const { selectedValues } = this.state;
     const { selectionLimit, onSelect, singleSelect, showCheckbox } = this.props;
+    this.setState({
+      inputValue: ''
+    });
     if (singleSelect) {
       this.onSingleSelect(item);
       onSelect([item], item);
