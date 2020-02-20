@@ -249,9 +249,11 @@ export class Multiselect extends React.Component {
       onSelect([item], item);
       return;
     }
-    if (this.isSelectedValue(item)) {
-      this.onRemoveSelectedItem(item);
-      return;
+    if(!selectSameOptionMultipleTimes){
+    	if (this.isSelectedValue(item)) {
+      		this.onRemoveSelectedItem(item);
+      	return;
+    	}
     }
     if (selectionLimit == selectedValues.length) {
       return;
@@ -473,5 +475,6 @@ Multiselect.defaultProps = {
   caseSensitiveSearch: false,
   id: '',
   closeOnSelect: true,
-  avoidHighlightFirstOption: false
+  avoidHighlightFirstOption: false,
+  selectSameOptionMultipleTimes:false
 };
