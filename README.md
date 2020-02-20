@@ -70,6 +70,8 @@ onRemove(selectedList, removedItem) {
 | `closeOnSelect` | `bool` | `true` | Dropdown get closed on select item.
 | `id` | `string` | `''` | Id for the input field.
 | `avoidHighlightFirstOption` | `bool` | `false` | Based on flag first option will get highlight whenever optionlist open.
+| `selectSameOptionMultipleTimes` | `bool` | `false` | To select the same item multiple times 
+
 
 ----
 
