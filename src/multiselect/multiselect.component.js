@@ -300,8 +300,8 @@ export class Multiselect extends React.Component {
     const { groupedObject } = this.state;
     return Object.keys(groupedObject).map(obj => {
 			return (
-				<React.Fragment>
-					<li key={obj} className={ms.groupHeading} style={style['groupHeading']}>{obj}</li>
+				<React.Fragment key={obj}>
+					<li className={ms.groupHeading} style={style['groupHeading']}>{obj}</li>
 					{groupedObject[obj].map((option, i) => (
 						<li
 							key={`option${i}`}
