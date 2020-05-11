@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/npm/v/multiselect-react-dropdown.svg) ![Downloads](https://img.shields.io/npm/dw/multiselect-react-dropdown.svg) ![License](https://img.shields.io/npm/l/multiselect-react-dropdown.svg) ![PRs](images/pr.png) ![Tweet](https://img.shields.io/twitter/url/https/twitter.com/ssrigar.svg?style=social)
 
-💥💥💥 **React Library for Component Lazyloading. Tiny and Efficient. [Check it Out](https://www.npmjs.com/package/react-observer-api)** 💥💥💥
+💥💥💥 **React Library for Component Lazyloading. Tiny and Efficient. [Check it Out](https://github.com/srigar/react-lazyloading)** 💥💥💥
 
 ## Description   
 
@@ -70,7 +70,7 @@ onRemove(selectedList, removedItem) {
 | `style` | `object` | `{}` | CSS Customization for multiselect. Refer below object for css customization.
 | `caseSensitiveSearch` | `bool` | `false` | Enables case sensitivity on the search field.
 | `closeOnSelect` | `bool` | `true` | Dropdown get closed on select item.
-| `id` | `string` | `''` | Id for the input field.
+| `id` | `string` | `''` | Id for the multiselect container and input field(In input field it will append '{id}_input').
 | `avoidHighlightFirstOption` | `bool` | `false` | Based on flag first option will get highlight whenever optionlist open.
 
 ----
