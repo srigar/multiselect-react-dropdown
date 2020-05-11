@@ -211,12 +211,13 @@ export class Multiselect extends React.Component {
       }
       this.onSelectItem(options[highlightOption]);
     }
-    setTimeout(() => {
-      const element = document.querySelector("ul.optionContainer .highlight");
-      if (element) {
-        element.scrollIntoView();
-      }
-    });
+    // TODO: Instead of scrollIntoView need to find better soln for scroll the dropwdown container.
+    // setTimeout(() => {
+    //   const element = document.querySelector("ul.optionContainer .highlight");
+    //   if (element) {
+    //     element.scrollIntoView();
+    //   }
+    // });
   }
 
   onRemoveSelectedItem(item) {
