@@ -262,6 +262,8 @@ export class Multiselect extends React.Component {
     this.setState({ selectedValues }, () => {
       if (!showCheckbox) {
 				this.removeSelectedValuesFromOptions(true);
+      } else {
+        this.filterOptionsByInput();
       }
     });
     if (!this.props.closeOnSelect) {
