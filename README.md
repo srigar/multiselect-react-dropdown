@@ -72,7 +72,7 @@ onRemove(selectedList, removedItem) {
 | `closeOnSelect` | `bool` | `true` | Dropdown get closed on select item.
 | `id` | `string` | `''` | Id for the multiselect container and input field(In input field it will append '{id}_input').
 | `avoidHighlightFirstOption` | `bool` | `false` | Based on flag first option will get highlight whenever optionlist open.
-
+| `hidePlaceholder` | `bool` | `false` | For true, placeholder will be hidden if there is any selected values in multiselect
 ----
 
 

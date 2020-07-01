@@ -413,7 +413,7 @@ export class Multiselect extends React.Component {
 
   renderMultiselectContainer() {
     const { inputValue, toggleOptionsList, selectedValues } = this.state;
-    const { placeholder, style, singleSelect, id } = this.props;
+    const { placeholder, style, singleSelect, id, hidePlaceholder } = this.props;
     return (
       <div className={ms.multiSelectContainer} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`${ms.searchWrapper} ${singleSelect ? ms.singleSelect : ''}`} 
@@ -430,7 +430,7 @@ export class Multiselect extends React.Component {
             value={inputValue}
             onFocus={this.toggelOptionList}
             onBlur={() => setTimeout(this.toggelOptionList, 200)}
-            placeholder={singleSelect && selectedValues.length ? '' : placeholder}
+            placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
             disabled={singleSelect}
@@ -474,5 +474,6 @@ Multiselect.defaultProps = {
   caseSensitiveSearch: false,
   id: '',
   closeOnSelect: true,
-  avoidHighlightFirstOption: false
+  avoidHighlightFirstOption: false,
+  hidePlaceholder: false
 };
