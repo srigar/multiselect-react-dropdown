@@ -88,7 +88,7 @@ export class Multiselect extends React.Component {
       this.setState({ options, filteredOptions: options, unfilteredOptions: options }, this.initialSetValue);
     }
     if (JSON.stringify(prevSelectedvalues) !== JSON.stringify(selectedValues)) {
-      this.setState({ selectedValues, preSelectedValues: selectedValues }, this.initialSetValue);
+      this.setState({ selectedValues: Object.assign([], selectedValues), preSelectedValues: Object.assign([], selectedValues) }, this.initialSetValue);
     }
   }
 
