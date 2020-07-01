@@ -73,6 +73,7 @@ onRemove(selectedList, removedItem) {
 | `id` | `string` | `''` | Id for the multiselect container and input field(In input field it will append '{id}_input').
 | `avoidHighlightFirstOption` | `bool` | `false` | Based on flag first option will get highlight whenever optionlist open.
 | `hidePlaceholder` | `bool` | `false` | For true, placeholder will be hidden if there is any selected values in multiselect
+| `disable` | `bool` | `false` | For true, dropdown will be disabled
 ----
 
 

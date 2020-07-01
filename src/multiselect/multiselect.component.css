@@ -3,6 +3,10 @@
   text-align: left;
   width: 100%;
 }
+.multiSelectContainer.disable {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .searchWrapper {
   border: 1px solid #cccccc;
   border-radius: 4px;
