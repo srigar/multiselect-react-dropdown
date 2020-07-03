@@ -435,7 +435,7 @@ export class Multiselect extends React.Component {
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
-            autocomplete="off"
+            autoComplete="off"
             disabled={singleSelect || disable}
           />
           {singleSelect && <i
