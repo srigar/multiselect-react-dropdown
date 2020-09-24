@@ -69,7 +69,7 @@ onRemove(selectedList, removedItem) {
 | `closeIcon` | `string` | `circle` | Option to select close icon instead of default. Refer `Close Icon` section
 | `style` | `object` | `{}` | CSS Customization for multiselect. Refer below object for css customization.
 | `caseSensitiveSearch` | `bool` | `false` | Enables case sensitivity on the search field.
-| `closeOnSelect` | `bool` | `true` | Dropdown get closed on select item.
+| `closeOnSelect` | `bool` | `true` | Dropdown get closed on select/remove item from options.
 | `id` | `string` | `''` | Id for the multiselect container and input field(In input field it will append '{id}_input').
 | `avoidHighlightFirstOption` | `bool` | `false` | Based on flag first option will get highlight whenever optionlist open.
 | `hidePlaceholder` | `bool` | `false` | For true, placeholder will be hidden if there is any selected values in multiselect

@@ -237,6 +237,9 @@ export class Multiselect extends React.Component {
 				this.removeSelectedValuesFromOptions(true);
       }
     });
+    if (!this.props.closeOnSelect) {
+      this.searchBox.current.focus();
+    }
   }
 
   onSelectItem(item) {
@@ -313,12 +316,12 @@ export class Multiselect extends React.Component {
 							onClick={() => this.onSelectItem(option)}
 						>
 							{showCheckbox && !singleSelect && (
-								<input
-									type="checkbox"
-                  className={ms.checkbox}
-                  readOnly
-									checked={this.isSelectedValue(option)}
-								/>
+                  <input
+                    type="checkbox"
+                    className={ms.checkbox}
+                    readOnly
+                    checked={this.isSelectedValue(option)}
+                  />
 							)}
 							{isObject ? option[displayValue] : (option || '').toString()}
 						</li>
@@ -332,24 +335,24 @@ export class Multiselect extends React.Component {
     const { isObject = false, displayValue, showCheckbox, style, singleSelect } = this.props;
     const { highlightOption } = this.state;
     return this.state.options.map((option, i) => (
-      <li
-				key={`option${i}`}
-				style={style['option']}
-        className={`${
-          highlightOption === i ? `${ms.highlightOption} highlight` : ""
-        } ${this.fadeOutSelection(option) && ms.disableSelection} option`}
-        onClick={() => this.onSelectItem(option)}
-      >
-        {showCheckbox && !singleSelect && (
-          <input
-            type="checkbox"
-            readOnly
-            className={`checkbox ${ms.checkbox}`}
-            checked={this.isSelectedValue(option)}
-          />
-        )}
-        {isObject ? option[displayValue] : (option || '').toString()}
-      </li>
+          <li
+            key={`option${i}`}
+            style={style['option']}
+            className={`${
+              highlightOption === i ? `${ms.highlightOption} highlight` : ""
+            } ${this.fadeOutSelection(option) && ms.disableSelection} option`}
+            onClick={() => this.onSelectItem(option)}
+          >
+            {showCheckbox && !singleSelect && (
+              <input
+                type="checkbox"
+                readOnly
+                className={`checkbox ${ms.checkbox}`}
+                checked={this.isSelectedValue(option)}
+              />
+            )}
+            {isObject ? option[displayValue] : (option || '').toString()}
+          </li>
     ));
   }
 
