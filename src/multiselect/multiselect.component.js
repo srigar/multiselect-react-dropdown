@@ -60,12 +60,17 @@ export class Multiselect extends React.Component {
 
   resetSelectedValues() {
     const { unfilteredOptions } = this.state;
-    this.setState({
-      selectedValues: [],
-      preSelectedValues: [],
-      options: unfilteredOptions,
-      filteredOptions: unfilteredOptions
-    }, this.initialSetValue);
+    return new Promise((resolve) => {
+      this.setState({
+        selectedValues: [],
+        preSelectedValues: [],
+        options: unfilteredOptions,
+        filteredOptions: unfilteredOptions
+      }, () => {
+        resolve();
+        this.initialSetValue();
+      });
+    });
   }
 
   getSelectedItems() {

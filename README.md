@@ -87,7 +87,7 @@ By using React.createRef() or useRef(), able to access below methods to get or r
 
 | Method Name | Description |
 |:--------- | :----  |
-| `resetSelectedValues` | Programatically reset selected values
+| `resetSelectedValues` | Programatically reset selected values and returns promise
 | `getSelectedItems` | Get all selected items
 | `getSelectedItemsCount` | Get selected items count
 
