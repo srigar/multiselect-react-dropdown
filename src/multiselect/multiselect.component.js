@@ -150,10 +150,14 @@ export class Multiselect extends React.Component {
   }
 
   onChange(event) {
+    const { onSearch } = this.props;
     this.setState(
       { inputValue: event.target.value },
       this.filterOptionsByInput
     );
+    if (onSearch) {
+      onSearch(event.target.value);
+    }
   }
 
   filterOptionsByInput() {
@@ -291,8 +295,16 @@ export class Multiselect extends React.Component {
   }
 
   renderOptionList() {
-    const { groupBy, style, emptyRecordMsg } = this.props;
+    const { groupBy, style, emptyRecordMsg, loading, loadingMessage = 'loading...' } = this.props;
     const { options } = this.state;
+    if (loading) {
+      return (
+        <ul className={`optionContainer`} style={style['optionContainer']}>
+          {typeof loadingMessage === 'string' && <span style={style['loadingMessage']} className={`notFound ${ms.notFound}`}>{loadingMessage}</span>}
+          {typeof loadingMessage !== 'string' && loadingMessage}
+        </ul>
+      );
+    }
     return (
       <ul className={`optionContainer`} style={style['optionContainer']}>
         {options.length === 0 && <span style={style['notFound']} className={`notFound ${ms.notFound}`}>{emptyRecordMsg}</span>}
