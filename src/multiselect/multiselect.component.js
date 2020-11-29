@@ -329,7 +329,10 @@ export class Multiselect extends React.Component {
 						<li
 							key={`option${i}`}
 							style={style['option']}
-							className={`${ms.groupChildEle} ${this.fadeOutSelection(option) && ms.disableSelection} option`}
+              className={`
+                ${ms.groupChildEle} ${this.fadeOutSelection(option) && ms.disableSelection}
+                ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
+              `}
 							onClick={() => this.onSelectItem(option)}
 						>
 							{showCheckbox && !singleSelect && (
@@ -355,9 +358,11 @@ export class Multiselect extends React.Component {
           <li
             key={`option${i}`}
             style={style['option']}
-            className={`${
-              highlightOption === i ? `${ms.highlightOption} highlight` : ""
-            } ${this.fadeOutSelection(option) && ms.disableSelection} option`}
+            className={`
+              ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
+              ${this.fadeOutSelection(option) && ms.disableSelection} 
+              ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
+            `}
             onClick={() => this.onSelectItem(option)}
           >
             {showCheckbox && !singleSelect && (
