@@ -231,7 +231,7 @@ export class Multiselect extends React.Component {
 
   onRemoveSelectedItem(item) {
 		let { selectedValues, index = 0, isObject } = this.state;
-		const { onRemove, showCheckbox } = this.props;
+		const { onRemove, showCheckbox, displayValue } = this.props;
     if (isObject) {
       index = selectedValues.findIndex(
         i => i[displayValue] === item[displayValue]
