@@ -192,7 +192,8 @@ export class Multiselect extends React.Component {
       inputValue,
       selectedValues
     } = this.state;
-    if (e.keyCode === 8 && !inputValue && selectedValues.length) {
+    const { disablePreSelectedValues } = this.props;
+    if (e.keyCode === 8 && !inputValue && !disablePreSelectedValues && selectedValues.length) {
       this.onRemoveSelectedItem(selectedValues.length - 1);
     }
     if (!options.length) {
