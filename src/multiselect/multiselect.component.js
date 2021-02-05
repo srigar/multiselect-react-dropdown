@@ -466,9 +466,9 @@ export class Multiselect extends React.Component {
             autoComplete="off"
             disabled={singleSelect || disable}
           />
-          {(singleSelect || showArrow) && <i
+           <i
             className={`icon_cancel ${ms.icon_down_dir}`}
-          />}
+          />
         </div>
         <div
           className={`optionListContainer ${ms.optionListContainer} ${
