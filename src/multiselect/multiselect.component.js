@@ -100,6 +100,7 @@ export class Multiselect extends React.Component {
 
   listenerCallback() {
     this.searchBox.current.focus();
+    this.searchWrapper.current.focus();
   }
 
   componentWillUnmount() {
