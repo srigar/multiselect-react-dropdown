@@ -22,6 +22,7 @@ export class Multiselect extends React.Component {
       toggleOptionsList: false,
       highlightOption: props.avoidHighlightFirstOption ? -1 : 0,
 			showCheckbox: props.showCheckbox,
+      keepSearchTerm: props.keepSearchTerm,
       groupedObject: [],
       closeIconType: closeIconTypes[props.closeIcon] || closeIconTypes['circle']
     };
@@ -255,9 +256,11 @@ export class Multiselect extends React.Component {
   onSelectItem(item) {
     const { selectedValues } = this.state;
     const { selectionLimit, onSelect, singleSelect, showCheckbox } = this.props;
-    this.setState({
-      inputValue: ''
-    });
+    if (!this.state.keepSearchTerm){
+      this.setState({
+        inputValue: ''
+      });
+    }
     if (singleSelect) {
       this.onSingleSelect(item);
       onSelect([item], item);
