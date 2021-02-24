@@ -25,9 +25,12 @@ export class Multiselect extends React.Component {
       groupedObject: [],
       closeIconType: closeIconTypes[props.closeIcon] || closeIconTypes['circle']
     };
+    this.optionTimeout = null;
 		this.searchWrapper = React.createRef();
 		this.searchBox = React.createRef();
     this.onChange = this.onChange.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
     this.renderMultiselectContainer = this.renderMultiselectContainer.bind(this);
     this.renderSelectedList = this.renderSelectedList.bind(this);
     this.onRemoveSelectedItem = this.onRemoveSelectedItem.bind(this);
@@ -439,6 +442,17 @@ export class Multiselect extends React.Component {
     });
   }
 
+  onFocus(e){
+    if(this.state.toggleOptionsList)
+      clearTimeout(this.optionTimeout);
+    else
+      this.toggelOptionList();
+  }
+
+  onBlur(e){
+    this.optionTimeout = setTimeout(this.toggelOptionList, 250);
+  }
+
   renderMultiselectContainer() {
     const { inputValue, toggleOptionsList, selectedValues } = this.state;
     const { placeholder, style, singleSelect, id, hidePlaceholder, disable, showArrow} = this.props;
@@ -456,8 +470,8 @@ export class Multiselect extends React.Component {
             id={`${id || 'search'}_input`}
             onChange={this.onChange}
             value={inputValue}
-            onFocus={this.toggelOptionList}
-            onBlur={() => setTimeout(this.toggelOptionList, 250)}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
