@@ -188,7 +188,10 @@ export class Multiselect extends React.Component {
     if (this.props.caseSensitiveSearch) {
       return value.indexOf(search) > -1;
     }
-    return value.toLowerCase().indexOf(search.toLowerCase()) > -1;
+    if (value.toLowerCase) {
+      return value.toLowerCase().indexOf(search.toLowerCase()) > -1;
+    }
+    return value.toString().indexOf(search) > -1;
   }
 
   onArrowKeyNavigation(e) {
