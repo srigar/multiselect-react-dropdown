@@ -106,8 +106,9 @@ export class Multiselect extends React.Component {
   }
 
   componentWillUnmount() {
-    if(this.optionTimeout)
+    if (this.optionTimeout) {
       clearTimeout(this.optionTimeout);
+    }
     this.searchWrapper.current.removeEventListener('click', this.listenerCallback);
   }
 
@@ -448,10 +449,11 @@ export class Multiselect extends React.Component {
   }
 
   onFocus(e){
-    if(this.state.toggleOptionsList)
+    if (this.state.toggleOptionsList) {
       clearTimeout(this.optionTimeout);
-    else
+    } else {
       this.toggelOptionList();
+    }
   }
 
   onBlur(e){
