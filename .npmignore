@@ -2,3 +2,5 @@ _layouts
 node_modules
 _config.yml
 webpack.config.js
+src
+images

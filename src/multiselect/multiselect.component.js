@@ -508,5 +508,6 @@ Multiselect.defaultProps = {
   closeOnSelect: true,
   avoidHighlightFirstOption: false,
   hidePlaceholder: false,
-  showArrow: false
+  showArrow: false,
+  keepSearchTerm: false
 };
