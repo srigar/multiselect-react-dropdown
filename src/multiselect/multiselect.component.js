@@ -59,9 +59,9 @@ export class Multiselect extends React.Component {
     if (!showCheckbox && !singleSelect) {
       this.removeSelectedValuesFromOptions(false);
 		} 
-    if (singleSelect) {
-      this.hideOnClickOutside();
-    }
+    // if (singleSelect) {
+    //   this.hideOnClickOutside();
+    // }
 		if (groupBy && showCheckbox) {
 			this.groupByOptions(options);
 		}
