@@ -49,6 +49,8 @@ export class Multiselect extends React.Component {
     this.resetSelectedValues = this.resetSelectedValues.bind(this);
     this.getSelectedItems = this.getSelectedItems.bind(this);
     this.getSelectedItemsCount = this.getSelectedItemsCount.bind(this);
+    this.hideOnClickOutside = this.hideOnClickOutside.bind(this);
+    this.isVisible = this.isVisible.bind(this);
   }
 
   initialSetValue() {
@@ -57,6 +59,9 @@ export class Multiselect extends React.Component {
     if (!showCheckbox && !singleSelect) {
       this.removeSelectedValuesFromOptions(false);
 		} 
+    if (singleSelect) {
+      this.hideOnClickOutside();
+    }
 		if (groupBy && showCheckbox) {
 			this.groupByOptions(options);
 		}
@@ -461,6 +466,20 @@ export class Multiselect extends React.Component {
 
   onBlur(e){
     this.optionTimeout = setTimeout(this.toggelOptionList, 250);
+  }
+
+  isVisible(elem) {
+    return !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
+  }
+
+  hideOnClickOutside() {
+    const element = document.getElementsByClassName('multiselect-container')[0];
+    const outsideClickListener = event => {
+        if (element && !element.contains(event.target) && this.isVisible(element)) {
+          this.toggelOptionList();
+        }
+    }
+    document.addEventListener('click', outsideClickListener)
   }
 
   renderMultiselectContainer() {
