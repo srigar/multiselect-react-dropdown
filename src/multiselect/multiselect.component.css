@@ -81,9 +81,6 @@
   pointer-events: none;
   opacity: 0.5;
 }
-.disableSelection .icon_cancel {
-  display: none;
-}
 .highlightOption {
   background: #0096fb;
   color: #ffffff;

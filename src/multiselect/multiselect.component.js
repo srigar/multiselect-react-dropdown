@@ -402,10 +402,10 @@ export class Multiselect extends React.Component {
     return selectedValues.map((value, index) => (
       <span className={`chip ${ms.chip} ${singleSelect && ms.singleChip} ${this.isDisablePreSelectedValues(value) && ms.disableSelection}`} key={index} style={style['chips']}>
         {!isObject ? (value || '').toString() : value[displayValue]}
-        <i
+        {!this.isDisablePreSelectedValues(value) && <i
           className={`icon_cancel ${ms[closeIconType]} ${ms.closeIcon}`}
           onClick={() => this.onRemoveSelectedItem(value)}
-        />
+        />}
       </span>
     ));
   }
