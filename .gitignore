@@ -1,4 +1,5 @@
 node_modules/
 .sonarlint/
 .vscode/
+dist/
 storybook-static/
