@@ -1,5 +1,7 @@
 const path = require("path");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: "./src/multiselect/multiselect.component.js",
@@ -16,7 +18,10 @@ module.exports = {
     progress: true
   },
   mode: "production",
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
+  plugins: [new MiniCssExtractPlugin({
+    filename: 'styles.css',
+  })],
   module: {
     rules: [
       {
@@ -28,15 +33,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              modules: true
-            }
-          }
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       { 
         test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
@@ -46,14 +43,11 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: false,
-        parallel: true,
-        uglifyOptions: {
-          compress: true,
-          ecma: 6,
-          mangle: true
-        }
+      new CssMinimizerPlugin({
+        sourceMap: false
+      }),
+      new TerserPlugin({
+        sourceMap: true
       })
     ]
   },

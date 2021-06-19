@@ -4,3 +4,5 @@ _config.yml
 webpack.config.js
 src
 images
+tsconfig.json
+tsdx.config.js
