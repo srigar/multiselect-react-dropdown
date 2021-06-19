@@ -23,12 +23,7 @@ const style = {
 export default {
   title: "Multiselect Dropdown",
   component: MultiSelect,
-  decorators: [withKnobs],
-  parameters: {
-    docs: {
-      previewSource: 'open'
-    }
-  }
+  decorators: [withKnobs]
 } as Meta;
 
 const Template: Story<IMultiselectProps> = (args) => <MultiSelect {...args} />;
