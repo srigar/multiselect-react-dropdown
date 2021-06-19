@@ -34,12 +34,12 @@ yarn add multiselect-react-dropdown
 ```
 ----
 ## 2. Demo 👁️
-[React-multi-select-dropdown]()
+[React-multi-select-dropdown](https://multiselect-react-dropdown.vercel.app/?path=/docs/multiselect-dropdown--flat-array)
 
 ----
 ## 3. Basic Usage 📑
 ```js
-import { Multiselect } from 'multiselect-react-dropdown';
+import Multiselect from 'multiselect-react-dropdown';
 
 this.state = {
     options: [{name: 'Option 1️⃣', id: 1},{name: 'Option 2️⃣', id: 2}]
