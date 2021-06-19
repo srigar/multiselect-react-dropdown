@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "npm run clean && webpack",
+    "build": "webpack",
     "build-tsdx": "tsdx build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
