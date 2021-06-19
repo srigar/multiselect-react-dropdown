@@ -44,6 +44,8 @@
     "multiselect",
     "multilist",
     "list",
+    "select",
+    "component",
     "autocomplete",
     "multiselect-react-dropdown",
     "react-multiselect-dropdown",
