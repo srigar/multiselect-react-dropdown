@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "npm run clean && webpack",
-    "build-tsdx": "tsdx build"
+    "build-tsdx": "tsdx build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -o /story"
   },
   "author": "srigar s",
   "license": "MIT",
@@ -25,33 +27,31 @@
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "@rollup/plugin-url": "^6.0.0",
-    "@svgr/rollup": "^5.5.0",
+    "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-essentials": "^6.2.9",
-    "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addons": "^6.2.9",
     "@storybook/react": "^6.2.9",
+    "@svgr/rollup": "^5.5.0",
     "@types/react": "^16.7.0",
     "@types/react-dom": "^16.7.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
     "css-minimizer-webpack-plugin": "^1.3.0",
     "mini-css-extract-plugin": "1.3.0",
+    "postcss": "^8.3.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "rollup-plugin-postcss": "^4.0.0",
+    "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.3",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4.3.2",
     "url-loader": "^1.1.2",
     "webpack": "^4.40.6",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0",
-    "postcss": "^8.3.0",
-    "rollup-plugin-postcss": "^4.0.0",
-    "typescript": "^4.3.2",
-    "style-loader": "^2.0.0",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.2.0"
+    "webpack-dev-server": "^3.11.0"
   },
   "babel": {
     "presets": [
@@ -79,5 +79,6 @@
     "normalize-url": "4.5.1",
     "css-what": "5.0.1",
     "glob-parent": "5.1.2"
-  }
+  },
+  "dependencies": {}
 }
