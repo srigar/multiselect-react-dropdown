@@ -9,7 +9,7 @@
     "build": "npm run clean && webpack",
     "build-tsdx": "tsdx build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o /story"
+    "build-storybook": "build-storybook"
   },
   "author": "srigar s",
   "license": "MIT",
