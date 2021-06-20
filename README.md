@@ -4,7 +4,7 @@
 ![Version](https://img.shields.io/npm/v/multiselect-react-dropdown.svg) 
 ![Downloads](https://img.shields.io/npm/dw/multiselect-react-dropdown.svg) 
 ![License](https://img.shields.io/npm/l/multiselect-react-dropdown.svg) 
-[![gzip](https://badgen.net/bundlephobia/minzip/multiselect-react-dropdown@latest)](https://bundlephobia.com/result?p=multiselect-react-dropdown@latest)
+[![gzip](https://badgen.net/bundlephobia/minzip/multiselect-react-dropdown@2.0.1)](https://bundlephobia.com/result?p=multiselect-react-dropdown@2.0.1)
 ![Tweet](https://img.shields.io/twitter/url/https/twitter.com/ssrigar.svg?style=social)
 
 💥💥💥 **React Library for Component Lazyloading. Tiny and Efficient. [Check it Out](https://github.com/srigar/react-lazyloading)** 💥💥💥
@@ -94,7 +94,7 @@ onRemove(selectedList, removedItem) {
 | `loadingMessage` | `any` | `''` | Custom loading message, it can be string or component.
 | `showArrow` | `bool` | `false` | For multiselect dropdown by default arrow wont show at the end, If required based on flag we can display
 | `keepSearchTerm` | `bool` | `false` | Whether or not to keep the search value after selecting or removing an item
-| `customCloseIcon` | `ReactNode | string` | `undefined` | Custom close icon and can be string or react component(Check demo for reference)
+| `customCloseIcon` | `ReactNode or string` | `undefined` | Custom close icon and can be string or react component(Check demo for reference)
 ----
 
 

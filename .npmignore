@@ -8,3 +8,4 @@ tsconfig.json
 tsdx.config.js
 .storybook
 stories
+.github
