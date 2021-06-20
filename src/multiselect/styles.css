@@ -1,3 +1,7 @@
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 .multiSelectContainer {
   position: relative;
   text-align: left;
@@ -27,10 +31,11 @@
   background: #0096fb;
   margin-right: 5px;
   margin-bottom: 5px;
-  border-radius: 10px;
+  border-radius: 11px;
   display: inline-flex;
   align-items: center;
   font-size: 13px;
+  line-height: 19px;
   color: #fff;
   white-space: nowrap;
 }
@@ -44,9 +49,10 @@
   display: none;
 }
 .closeIcon {
-  font-size: 12px;
+  height: 13px;
+  width: 13px;
   float: right;
-  margin-left: 2px;
+  margin-left: 5px;
   cursor: pointer;
 }
 .optionListContainer {
@@ -106,18 +112,6 @@ li.groupHeading {
 li.groupChildEle {
   padding-left: 30px;
 }
-.icon_cancel_circled:before {
-  content: "\e800";
-}
-.icon_cancel:before {
-  content: "\e801";
-}
-.icon_cancel_circled2:before {
-  content: "\e802";
-}
-.icon_window_close:before {
-  content: "\f2d3";
-}
 .icon_down_dir {
   position: absolute;
   right: 5px;
@@ -126,4 +120,7 @@ li.groupChildEle {
 }
 .icon_down_dir:before { 
   content: '\e803'; 
+}
+.custom-close {
+  display: flex;
 }

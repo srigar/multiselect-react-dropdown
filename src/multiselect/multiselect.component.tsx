@@ -1,15 +1,21 @@
+// @ts-nocheck
 import React from "react";
-import ms from "./multiselect.component.css";
-import "../assets/closeicon/css/fontello.css";
+import "./styles.css";
+import CloseCircle from '../assets/svg/closeCircle.svg';
+import CloseCircleDark from '../assets/svg/closeCircleDark.svg';
+import CloseLine from '../assets/svg/closeLine.svg';
+import CloseSquare from '../assets/svg/closeSquare.svg';
+import { IMultiselectProps } from "./interface";
 
 const closeIconTypes = {
-  circle: 'icon_cancel_circled',
-  circle2: 'icon_cancel_circled2',
-  close: 'icon_window_close',
-  cancel: 'icon_cancel'
+  circle: CloseCircleDark,
+  circle2: CloseCircle,
+  close: CloseSquare,
+  cancel: CloseLine
 };
 
-export class Multiselect extends React.Component {
+export class Multiselect extends React.Component<IMultiselectProps, any> {
+  static defaultProps: { options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
   constructor(props) {
     super(props);
     this.state = {
@@ -26,8 +32,11 @@ export class Multiselect extends React.Component {
       groupedObject: [],
       closeIconType: closeIconTypes[props.closeIcon] || closeIconTypes['circle']
     };
+    // @ts-ignore
     this.optionTimeout = null;
+    // @ts-ignore
 		this.searchWrapper = React.createRef();
+    // @ts-ignore
 		this.searchBox = React.createRef();
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
@@ -76,6 +85,7 @@ export class Multiselect extends React.Component {
         options: unfilteredOptions,
         filteredOptions: unfilteredOptions
       }, () => {
+        // @ts-ignore
         resolve();
         this.initialSetValue();
       });
@@ -92,6 +102,7 @@ export class Multiselect extends React.Component {
 
   componentDidMount() {
 		this.initialSetValue();
+    // @ts-ignore
     this.searchWrapper.current.addEventListener("click", this.listenerCallback);
   }
 
@@ -107,13 +118,17 @@ export class Multiselect extends React.Component {
   }
 
   listenerCallback() {
+    // @ts-ignore
     this.searchBox.current.focus();
   }
 
   componentWillUnmount() {
+    // @ts-ignore
     if (this.optionTimeout) {
+      // @ts-ignore
       clearTimeout(this.optionTimeout);
     }
+    // @ts-ignore
     this.searchWrapper.current.removeEventListener('click', this.listenerCallback);
   }
 
@@ -263,6 +278,7 @@ export class Multiselect extends React.Component {
       }
     });
     if (!this.props.closeOnSelect) {
+      // @ts-ignore
       this.searchBox.current.focus();
     }
   }
@@ -297,6 +313,7 @@ export class Multiselect extends React.Component {
       }
     });
     if (!this.props.closeOnSelect) {
+      // @ts-ignore
       this.searchBox.current.focus();
     }
   }
@@ -323,14 +340,14 @@ export class Multiselect extends React.Component {
     if (loading) {
       return (
         <ul className={`optionContainer`} style={style['optionContainer']}>
-          {typeof loadingMessage === 'string' && <span style={style['loadingMessage']} className={`notFound ${ms.notFound}`}>{loadingMessage}</span>}
+          {typeof loadingMessage === 'string' && <span style={style['loadingMessage']} className={`notFound`}>{loadingMessage}</span>}
           {typeof loadingMessage !== 'string' && loadingMessage}
         </ul>
       );
     }
     return (
       <ul className={`optionContainer`} style={style['optionContainer']}>
-        {options.length === 0 && <span style={style['notFound']} className={`notFound ${ms.notFound}`}>{emptyRecordMsg}</span>}
+        {options.length === 0 && <span style={style['notFound']} className={`notFound`}>{emptyRecordMsg}</span>}
         {!groupBy ? this.renderNormalOption() : this.renderGroupByOptions()}
       </ul>
     );
@@ -342,21 +359,21 @@ export class Multiselect extends React.Component {
     return Object.keys(groupedObject).map(obj => {
 			return (
 				<React.Fragment key={obj}>
-					<li className={ms.groupHeading} style={style['groupHeading']}>{obj}</li>
+					<li className="groupHeading" style={style['groupHeading']}>{obj}</li>
 					{groupedObject[obj].map((option, i) => (
 						<li
 							key={`option${i}`}
 							style={style['option']}
               className={`
-                ${ms.groupChildEle} ${this.fadeOutSelection(option) && ms.disableSelection}
-                ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
+               groupChildEle ${this.fadeOutSelection(option) && 'disableSelection'}
+                ${this.isDisablePreSelectedValues(option) && 'disableSelection'} option
               `}
 							onClick={() => this.onSelectItem(option)}
 						>
 							{showCheckbox && !singleSelect && (
                   <input
                     type="checkbox"
-                    className={ms.checkbox}
+                    className={'checkbox'}
                     readOnly
                     checked={this.isSelectedValue(option)}
                   />
@@ -377,9 +394,9 @@ export class Multiselect extends React.Component {
             key={`option${i}`}
             style={style['option']}
             className={`
-              ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
-              ${this.fadeOutSelection(option) && ms.disableSelection} 
-              ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
+              ${highlightOption === i ? `highlightOption highlight` : ""} 
+              ${this.fadeOutSelection(option) && 'disableSelection'} 
+              ${this.isDisablePreSelectedValues(option) && 'disableSelection'} option
             `}
             onClick={() => this.onSelectItem(option)}
           >
@@ -387,7 +404,7 @@ export class Multiselect extends React.Component {
               <input
                 type="checkbox"
                 readOnly
-                className={`checkbox ${ms.checkbox}`}
+                className={`checkbox`}
                 checked={this.isSelectedValue(option)}
               />
             )}
@@ -397,15 +414,16 @@ export class Multiselect extends React.Component {
   }
 
   renderSelectedList() {
-    const { isObject = false, displayValue, style, singleSelect } = this.props;
+    const { isObject = false, displayValue, style, singleSelect, customCloseIcon } = this.props;
     const { selectedValues, closeIconType } = this.state;
     return selectedValues.map((value, index) => (
-      <span className={`chip ${ms.chip} ${singleSelect && ms.singleChip} ${this.isDisablePreSelectedValues(value) && ms.disableSelection}`} key={index} style={style['chips']}>
+      <span className={`chip  ${singleSelect && 'singleChip'} ${this.isDisablePreSelectedValues(value) && 'disableSelection'}`} key={index} style={style['chips']}>
         {!isObject ? (value || '').toString() : value[displayValue]}
-        {!this.isDisablePreSelectedValues(value) && <i
-          className={`icon_cancel ${ms[closeIconType]} ${ms.closeIcon}`}
+        {!this.isDisablePreSelectedValues(value) && (!customCloseIcon ? <img
+          className="icon_cancel closeIcon"
+          src={closeIconType}
           onClick={() => this.onRemoveSelectedItem(value)}
-        />}
+        /> : <i className="custom-close" onClick={() => this.onRemoveSelectedItem(value)}>{customCloseIcon}</i>)}
       </span>
     ));
   }
@@ -456,15 +474,17 @@ export class Multiselect extends React.Component {
     });
   }
 
-  onFocus(e){
+  onFocus(){
     if (this.state.toggleOptionsList) {
+      // @ts-ignore
       clearTimeout(this.optionTimeout);
     } else {
       this.toggelOptionList();
     }
   }
 
-  onBlur(e){
+  onBlur(){
+    // @ts-ignore
     this.optionTimeout = setTimeout(this.toggelOptionList, 250);
   }
 
@@ -486,8 +506,8 @@ export class Multiselect extends React.Component {
     const { inputValue, toggleOptionsList, selectedValues } = this.state;
     const { placeholder, style, singleSelect, id, hidePlaceholder, disable, showArrow} = this.props;
     return (
-      <div className={`multiselect-container ${ms.multiSelectContainer} ${disable ? `${ms.disable_ms} disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
-        <div className={`search-wrapper ${ms.searchWrapper} ${singleSelect ? ms.singleSelect : ''}`} 
+      <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
+        <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`} 
           ref={this.searchWrapper} style={style['searchBox']} 
           onClick={singleSelect ? this.toggelOptionList : () => {}}
         >
@@ -508,12 +528,12 @@ export class Multiselect extends React.Component {
             disabled={singleSelect || disable}
           />
           {(singleSelect || showArrow) && <i
-            className={`icon_cancel ${ms.icon_down_dir}`}
+            className={`icon_cancel icon_down_dir`}
           />}
         </div>
         <div
-          className={`optionListContainer ${ms.optionListContainer} ${
-            toggleOptionsList ? ms.displayBlock : ms.displayNone
+          className={`optionListContainer ${
+            toggleOptionsList ? 'displayBlock' : 'displayNone'
           }`}
         >
           {this.renderOptionList()}
@@ -549,5 +569,6 @@ Multiselect.defaultProps = {
   avoidHighlightFirstOption: false,
   hidePlaceholder: false,
   showArrow: false,
-  keepSearchTerm: false
+  keepSearchTerm: false,
+  customCloseIcon: ''
 };
