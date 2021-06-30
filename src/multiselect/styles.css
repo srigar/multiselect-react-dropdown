@@ -114,9 +114,10 @@ li.groupChildEle {
 }
 .icon_down_dir {
   position: absolute;
-  right: 5px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
+  width: 14px;
 }
 .icon_down_dir:before { 
   content: '\e803'; 

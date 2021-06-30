@@ -5,6 +5,7 @@ import CloseCircle from '../assets/svg/closeCircle.svg';
 import CloseCircleDark from '../assets/svg/closeCircleDark.svg';
 import CloseLine from '../assets/svg/closeLine.svg';
 import CloseSquare from '../assets/svg/closeSquare.svg';
+import DownArrow from '../assets/svg/downArrow.svg';
 import { IMultiselectProps } from "./interface";
 
 const closeIconTypes = {
@@ -527,7 +528,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             autoComplete="off"
             disabled={singleSelect || disable}
           />
-          {(singleSelect || showArrow) && <i
+          {(singleSelect || showArrow) && <img
+            src={DownArrow}
             className={`icon_cancel icon_down_dir`}
           />}
         </div>
