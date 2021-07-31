@@ -14,6 +14,7 @@ export interface IMultiselectProps {
     emptyRecordMsg?: string,
     onSelect?: (selectedList:any, selectedItem: any) => void,
     onRemove?: (selectedList:any, selectedItem: any) => void,
+    onSearch?: (value:string) => void,
     closeIcon?: string,
     singleSelect?: boolean,
     caseSensitiveSearch?: boolean,
