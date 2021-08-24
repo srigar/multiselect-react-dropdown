@@ -72,7 +72,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     // if (singleSelect) {
     //   this.hideOnClickOutside();
     // }
-		if (groupBy && showCheckbox) {
+		if (groupBy) {
 			this.groupByOptions(options);
 		}
   }
