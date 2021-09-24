@@ -9,7 +9,7 @@ export interface IMultiselectProps {
     showCheckbox?: boolean,
     selectionLimit?: any,
     placeholder?: string,
-    groupBy?: "",
+    groupBy?: string,
     style?: object,
     emptyRecordMsg?: string,
     onSelect?: (selectedList:any, selectedItem: any) => void,
