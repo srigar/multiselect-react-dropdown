@@ -16,11 +16,12 @@ const closeIconTypes = {
 };
 
 export class Multiselect extends React.Component<IMultiselectProps, any> {
-  static defaultProps: { options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
+  static defaultProps: { disableFilter: boolean; customFilter: (v: any, search: string, index: number, arr: Array<any>) => boolean; options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
   constructor(props) {
     super(props);
     this.state = {
       inputValue: "",
+      disableFilter: props.disableFilter,
       options: props.options,
       filteredOptions: props.options,
       unfilteredOptions: props.options,
@@ -61,6 +62,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.getSelectedItemsCount = this.getSelectedItemsCount.bind(this);
     this.hideOnClickOutside = this.hideOnClickOutside.bind(this);
     this.isVisible = this.isVisible.bind(this);
+    this.customFilter = props.customFilter.bind(this);
   }
 
   initialSetValue() {
@@ -194,13 +196,25 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   filterOptionsByInput() {
-    let { options, filteredOptions, inputValue } = this.state;
-    const { isObject, displayValue } = this.props;
-    if (isObject) {
-      options = filteredOptions.filter(i => this.matchValues(i[displayValue], inputValue))
-    } else {
-      options = filteredOptions.filter(i => this.matchValues(i, inputValue));
+    let { options, filteredOptions, inputValue, disableFilter, customFilter } = this.state;
+
+    if (disableFilter) {
+      this.groupByOptions(options);
+      this.setState({ options });
+      return
     }
+    
+    if (customFilter) {
+      options = filteredOptions.filter((v, i, arr) => customFilter(v, inputValue, i, arr))
+    } else {
+      const { isObject, displayValue } = this.props;
+      if (isObject) {
+        options = filteredOptions.filter(i => this.matchValues(i[displayValue], inputValue))
+      } else {
+        options = filteredOptions.filter(i => this.matchValues(i, inputValue));
+      }
+    }
+
     this.groupByOptions(options);
     this.setState({ options });
   }
