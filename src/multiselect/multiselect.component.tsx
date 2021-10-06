@@ -62,7 +62,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.getSelectedItemsCount = this.getSelectedItemsCount.bind(this);
     this.hideOnClickOutside = this.hideOnClickOutside.bind(this);
     this.isVisible = this.isVisible.bind(this);
-    this.customFilter = props.customFilter.bind(this);
+    this.customFilter = props?.customFilter?.bind(this);
   }
 
   initialSetValue() {
