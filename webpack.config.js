@@ -2,9 +2,9 @@ const path = require("path");
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-
+console.log(path, __dirname)
 module.exports = {
-  entry: "./src/multiselect/multiselect.component.js",
+  entry: "./src/multiselect/multiselect.component.tsx",
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: "index.js",
@@ -25,6 +25,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.js$/,
         exclude: /(node_modules|bower_components|build|dist)/,
         use: {
@@ -40,6 +45,9 @@ module.exports = {
         loader: 'url-loader?limit=100000' 
       }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   optimization: {
     minimizer: [
