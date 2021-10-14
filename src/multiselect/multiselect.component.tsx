@@ -494,11 +494,14 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   hideOnClickOutside() {
-    const element = document.getElementsByClassName('multiselect-container')[0];
+    this.toggelOptionList();
+    const element = this.searchWrapper.current.parentElement.classList.contains('multiselect-container') ? this.searchWrapper.current.parentElement : null;
     const outsideClickListener = event => {
-        if (element && !element.contains(event.target) && this.isVisible(element)) {
+        if (!element.contains(event.target) && this.searchWrapper.current.classList.contains('isActive')) {
           this.toggelOptionList();
+          this.searchWrapper.current.classList.remove('isActive');
         }
+        document.removeEventListener('click', outsideClickListener)
     }
     document.addEventListener('click', outsideClickListener)
   }
@@ -510,7 +513,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`} 
           ref={this.searchWrapper} style={style['searchBox']} 
-          onClick={singleSelect ? this.toggelOptionList : () => {}}
+          onClick={singleSelect ? this.hideOnClickOutside : () => {}}
         >
           {this.renderSelectedList()}
           <input
