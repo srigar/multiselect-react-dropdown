@@ -367,7 +367,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 							style={style['option']}
               className={`
                groupChildEle ${this.fadeOutSelection(option) && 'disableSelection'}
-                ${this.isDisablePreSelectedValues(option) && 'disableSelection'} option
+                ${this.isDisablePreSelectedValues(option) && 'disableSelection'}
+                ${option.disabled && 'disableSelection'} option
               `}
 							onClick={() => this.onSelectItem(option)}
 						>
@@ -397,7 +398,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             className={`
               ${highlightOption === i ? `highlightOption highlight` : ""} 
               ${this.fadeOutSelection(option) && 'disableSelection'} 
-              ${this.isDisablePreSelectedValues(option) && 'disableSelection'} option
+              ${this.isDisablePreSelectedValues(option) && 'disableSelection'} 
+              ${option.disabled && 'disableSelection'} option
             `}
             onClick={() => this.onSelectItem(option)}
           >
