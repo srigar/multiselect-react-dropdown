@@ -15,6 +15,8 @@ const closeIconTypes = {
   cancel: CloseLine
 };
 
+const CLASS_IS_ACTIVE = 'isActive';
+
 export class Multiselect extends React.Component<IMultiselectProps, any> {
   static defaultProps: { options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
   constructor(props) {
@@ -45,7 +47,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.renderMultiselectContainer = this.renderMultiselectContainer.bind(this);
     this.renderSelectedList = this.renderSelectedList.bind(this);
     this.onRemoveSelectedItem = this.onRemoveSelectedItem.bind(this);
-    this.toggelOptionList = this.toggelOptionList.bind(this);
+    this.toggleOptionList = this.toggleOptionList.bind(this);
     this.onArrowKeyNavigation = this.onArrowKeyNavigation.bind(this);
     this.onSelectItem = this.onSelectItem.bind(this);
     this.filterOptionsByInput = this.filterOptionsByInput.bind(this);
@@ -59,7 +61,6 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.resetSelectedValues = this.resetSelectedValues.bind(this);
     this.getSelectedItems = this.getSelectedItems.bind(this);
     this.getSelectedItemsCount = this.getSelectedItemsCount.bind(this);
-    this.hideOnClickOutside = this.hideOnClickOutside.bind(this);
     this.isVisible = this.isVisible.bind(this);
   }
 
@@ -69,9 +70,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     if (!showCheckbox && !singleSelect) {
       this.removeSelectedValuesFromOptions(false);
 		} 
-    // if (singleSelect) {
-    //   this.hideOnClickOutside();
-    // }
+    
 		if (groupBy) {
 			this.groupByOptions(options);
 		}
@@ -320,7 +319,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   onSingleSelect(item) {
-    this.setState({ selectedValues: [item], toggleOptionsList: false });
+    this.setState({ selectedValues: [item], toggleOptionsList: true });
   }
 
   isSelectedValue(item) {
@@ -470,11 +469,12 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     }
   }
 
-  toggelOptionList() {
+  toggleOptionList() {
     this.setState({
       toggleOptionsList: !this.state.toggleOptionsList,
       highlightOption: this.props.avoidHighlightFirstOption ? -1 : 0
     });
+    this.searchWrapper.current.classList.toggle(CLASS_IS_ACTIVE);
   }
 
   onFocus(){
@@ -482,30 +482,17 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
     } else {
-      this.toggelOptionList();
+      this.toggleOptionList();
     }
   }
 
   onBlur(){
     // @ts-ignore
-    this.optionTimeout = setTimeout(this.toggelOptionList, 250);
+    this.optionTimeout = setTimeout(this.toggleOptionList, 250);
   }
 
   isVisible(elem) {
     return !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
-  }
-
-  hideOnClickOutside() {
-    this.toggelOptionList();
-    const element = this.searchWrapper.current.parentElement.classList.contains('multiselect-container') ? this.searchWrapper.current.parentElement : null;
-    const outsideClickListener = event => {
-        if (!element.contains(event.target) && this.searchWrapper.current.classList.contains('isActive')) {
-          this.toggelOptionList();
-          this.searchWrapper.current.classList.remove('isActive');
-        }
-        document.removeEventListener('click', outsideClickListener)
-    }
-    document.addEventListener('click', outsideClickListener)
   }
 
   renderMultiselectContainer() {
@@ -514,8 +501,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     return (
       <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`} 
-          ref={this.searchWrapper} style={style['searchBox']} 
-          onClick={singleSelect ? this.hideOnClickOutside : () => {}}
+          ref={this.searchWrapper} style={style['searchBox']}
         >
           {this.renderSelectedList()}
           <input
@@ -531,7 +517,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
             autoComplete="off"
-            disabled={singleSelect || disable}
+            disabled={disable}
           />
           {(singleSelect || showArrow) && <img
             src={DownArrow}
