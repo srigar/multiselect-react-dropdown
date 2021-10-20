@@ -44,6 +44,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
+    this.onSelectOrClick = this.onSelectOrClick.bind(this);
     this.renderMultiselectContainer = this.renderMultiselectContainer.bind(this);
     this.renderSelectedList = this.renderSelectedList.bind(this);
     this.onRemoveSelectedItem = this.onRemoveSelectedItem.bind(this);
@@ -320,6 +321,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 
   onSingleSelect(item) {
     this.setState({ selectedValues: [item], toggleOptionsList: true });
+    this.onSelectOrClick();
   }
 
   isSelectedValue(item) {
@@ -491,6 +493,23 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.optionTimeout = setTimeout(this.toggleOptionList, 250);
   }
 
+  onSelectOrClick(){
+    const el = this.searchBox.current;
+    const container = el.parentNode;
+    const tmp = document.createElement('div');
+
+    container.insertBefore(tmp, el);
+    container.removeChild(el);
+    container.insertBefore(el, tmp);
+    container.removeChild(tmp);
+
+    setTimeout(() => {
+      if(container.classList.contains(CLASS_IS_ACTIVE)) {
+        this.onBlur();
+      }
+    }, 250);
+  }
+
   isVisible(elem) {
     return !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
   }
@@ -513,6 +532,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             value={inputValue}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
+            onClick={this.onSelectOrClick}
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
