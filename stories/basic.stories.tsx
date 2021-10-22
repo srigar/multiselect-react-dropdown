@@ -107,3 +107,11 @@ CustomCloseIcon.args = {
   customCloseIcon: <>🍑</>,
   selectedValues
 };
+
+export const RequiredField = Template.bind({});
+RequiredField.args = {
+  options,
+  displayValue: 'key',
+  selectedValues,
+  required: true,
+};

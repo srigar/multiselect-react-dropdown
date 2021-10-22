@@ -95,6 +95,7 @@ onRemove(selectedList, removedItem) {
 | `showArrow` | `bool` | `false` | For multiselect dropdown by default arrow wont show at the end, If required based on flag we can display
 | `keepSearchTerm` | `bool` | `false` | Whether or not to keep the search value after selecting or removing an item
 | `customCloseIcon` | `ReactNode or string` | `undefined` | Custom close icon and can be string or react component(Check demo for reference)
+| `required` | `boolean` | `false` | Marks the input field as required to prevent form submission with missing values
 ----
 
 
