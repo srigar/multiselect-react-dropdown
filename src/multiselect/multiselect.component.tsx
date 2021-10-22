@@ -506,8 +506,9 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   renderMultiselectContainer() {
     const { inputValue, toggleOptionsList, selectedValues } = this.state;
     const { placeholder, style, singleSelect, id, hidePlaceholder, disable, showArrow, required} = this.props;
+    const hasRequiredError = required && selectedValues.length === 0;
     return (
-      <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
+      <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''}  ${hasRequiredError ? 'hasRequiredError' : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`} 
           ref={this.searchWrapper} style={style['searchBox']} 
           onClick={singleSelect ? this.toggelOptionList : () => {}}
@@ -527,7 +528,6 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             style={style['inputField']}
             autoComplete="off"
             disabled={singleSelect || disable}
-            required={required}
           />
           {(singleSelect || showArrow) && <img
             src={DownArrow}
