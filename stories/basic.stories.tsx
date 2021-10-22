@@ -27,6 +27,16 @@ export default {
 } as Meta;
 
 const Template: Story<IMultiselectProps> = (args) => <MultiSelect {...args} />;
+const SubmitTemplate: Story<IMultiselectProps> = args => {
+  return (
+    <>
+      <form>
+        <MultiSelect {...args} />
+        <input type="submit" onSubmit={() => {}} />
+      </form>
+    </>
+  )
+}
 
 export const FlatArray = Template.bind({});
 FlatArray.args = {
@@ -108,7 +118,7 @@ CustomCloseIcon.args = {
   selectedValues
 };
 
-export const RequiredField = Template.bind({});
+export const RequiredField = SubmitTemplate.bind({});
 RequiredField.args = {
   options,
   displayValue: 'key',
