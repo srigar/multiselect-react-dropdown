@@ -538,6 +538,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             style={style['inputField']}
             autoComplete="off"
             disabled={disable}
+            readOnly={true}
           />
           {(singleSelect || showArrow) && <img
             src={DownArrow}
