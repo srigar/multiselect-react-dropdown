@@ -537,6 +537,9 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
           className={`optionListContainer ${
             toggleOptionsList ? 'displayBlock' : 'displayNone'
           }`}
+          onMouseDown={(e) => {
+            e.preventDefault();
+          }}
         >
           {this.renderOptionList()}
         </div>
