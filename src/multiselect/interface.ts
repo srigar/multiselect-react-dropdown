@@ -10,6 +10,7 @@ export interface IMultiselectProps {
     selectionLimit?: any,
     placeholder?: string,
     groupBy?: string,
+    loading?: boolean,
     style?: object,
     emptyRecordMsg?: string,
     onSelect?: (selectedList:any, selectedItem: any) => void,
