@@ -18,6 +18,14 @@
   min-height: 22px;
   position: relative;
 }
+.hasRequiredError .searchWrapper {
+  border-color: red;
+}
+.hasRequiredError::after {
+  color: red;
+  content: "Please select a value";
+  font-style: italic;
+}
 .multiSelectContainer input {
   border: none;
   margin-top: 3px;
