@@ -86,6 +86,7 @@ onRemove(selectedList, removedItem) {
 | `caseSensitiveSearch` | `bool` | `false` | Enables case sensitivity on the search field.
 | `closeOnSelect` | `bool` | `true` | Dropdown get closed on select/remove item from options.
 | `id` | `string` | `''` | Id for the multiselect container and input field(In input field it will append '{id}_input').
+| `className` | `string` | `''` | Class for the multiselect container wrapper.
 | `avoidHighlightFirstOption` | `bool` | `false` | Based on flag first option will get highlight whenever optionlist open.
 | `hidePlaceholder` | `bool` | `false` | For true, placeholder will be hidden if there is any selected values in multiselect
 | `disable` | `bool` | `false` | For true, dropdown will be disabled
