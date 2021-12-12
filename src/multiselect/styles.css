@@ -1,4 +1,7 @@
-*, ::after, ::before {
+.multiSelectContainer,
+.multiSelectContainer *,
+.multiSelectContainer ::after, 
+.multiSelectContainer ::before {
   box-sizing: border-box;
 }
 
