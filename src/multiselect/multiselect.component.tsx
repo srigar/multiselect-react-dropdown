@@ -508,7 +508,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   onCloseOptionList() {
     this.setState({
       toggleOptionsList: false,
-      highlightOption: this.props.avoidHighlightFirstOption ? -1 : 0
+      highlightOption: this.props.avoidHighlightFirstOption ? -1 : 0,
+      inputValue: ''
     });
   }
 
