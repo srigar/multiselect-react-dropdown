@@ -26,5 +26,7 @@ export interface IMultiselectProps {
     hidePlaceholder?: boolean,
     showArrow?: boolean,
     keepSearchTerm?: boolean,
-    customCloseIcon?: React.ReactNode | string
+    customCloseIcon?: React.ReactNode | string,
+    customArrow?: any;
+    className?: string;
 }
