@@ -94,6 +94,7 @@ onRemove(selectedList, removedItem) {
 | `loading` | `bool` | `false` | If options is fetching from api, in the meantime, we can show `loading...` message in the list.
 | `loadingMessage` | `any` | `''` | Custom loading message, it can be string or component.
 | `showArrow` | `bool` | `false` | For multiselect dropdown by default arrow wont show at the end, If required based on flag we can display
+| `customArrow` | `any` | `undefined` | For multiselect dropdown custom arrow option
 | `keepSearchTerm` | `bool` | `false` | Whether or not to keep the search value after selecting or removing an item
 | `customCloseIcon` | `ReactNode or string` | `undefined` | Custom close icon and can be string or react component(Check demo for reference)
 ----
