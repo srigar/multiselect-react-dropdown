@@ -6,7 +6,7 @@ import CloseCircleDark from '../assets/svg/closeCircleDark.svg';
 import CloseLine from '../assets/svg/closeLine.svg';
 import CloseSquare from '../assets/svg/closeSquare.svg';
 import DownArrow from '../assets/svg/downArrow.svg';
-import { IMultiselectProps } from "./interface";
+import {IMultiselectProps} from "./interface";
 
 const closeIconTypes = {
   circle: CloseCircleDark,
@@ -16,7 +16,7 @@ const closeIconTypes = {
 };
 
 export class Multiselect extends React.Component<IMultiselectProps, any> {
-  static defaultProps: { options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
+  static defaultProps: { options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void;onKeyPressFn: ()=>void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +40,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     // @ts-ignore
 		this.searchBox = React.createRef();
     this.onChange = this.onChange.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.renderMultiselectContainer = this.renderMultiselectContainer.bind(this);
@@ -68,7 +69,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 		const { options } = this.state;
     if (!showCheckbox && !singleSelect) {
       this.removeSelectedValuesFromOptions(false);
-		} 
+		}
     // if (singleSelect) {
     //   this.hideOnClickOutside();
     // }
@@ -178,7 +179,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       r[key].push(a);
       return r;
     }, Object.create({}));
-    
+
     this.setState({ groupedObject });
   }
 
@@ -190,6 +191,13 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     );
     if (onSearch) {
       onSearch(event.target.value);
+    }
+  }
+
+  onKeyPress(event) {
+    const { onKeyPressFn } = this.props;
+    if (onKeyPressFn) {
+        onKeyPressFn(event, event.target.value);
     }
   }
 
@@ -508,8 +516,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     const { placeholder, style, singleSelect, id, hidePlaceholder, disable, showArrow} = this.props;
     return (
       <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
-        <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`} 
-          ref={this.searchWrapper} style={style['searchBox']} 
+        <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`}
+          ref={this.searchWrapper} style={style['searchBox']}
           onClick={singleSelect ? this.toggelOptionList : () => {}}
         >
           {this.renderSelectedList()}
@@ -519,6 +527,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             className="searchBox"
             id={`${id || 'search'}_input`}
             onChange={this.onChange}
+            onKeyPress={this.onKeyPress}
             value={inputValue}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
@@ -537,6 +546,9 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
           className={`optionListContainer ${
             toggleOptionsList ? 'displayBlock' : 'displayNone'
           }`}
+          onMouseDown={(e) => {
+            e.preventDefault();
+          }}
         >
           {this.renderOptionList()}
         </div>
@@ -563,6 +575,7 @@ Multiselect.defaultProps = {
 	emptyRecordMsg: "No Options Available",
 	onSelect: () => {},
   onRemove: () => {},
+  onKeyPressFn: () => {},
   closeIcon: 'circle2',
   singleSelect: false,
   caseSensitiveSearch: false,
