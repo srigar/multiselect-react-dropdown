@@ -391,6 +391,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     const { isObject = false, displayValue, showCheckbox, style, singleSelect } = this.props;
     const { groupedObject } = this.state;
     return Object.keys(groupedObject).map(obj => {
+      const isSelected = this.isSelectedValue(option);
 			return (
 				<React.Fragment key={obj}>
 					<li className="groupHeading" style={style['groupHeading']}>{obj}</li>
@@ -398,10 +399,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 						<li
 							key={`option${i}`}
 							style={style['option']}
-              className={`
-               groupChildEle ${this.fadeOutSelection(option) && 'disableSelection'}
-                ${this.isDisablePreSelectedValues(option) && 'disableSelection'} option
-              `}
+              className={`groupChildEle option ${isSelected ? 'selected' : ''} ${this.fadeOutSelection(option) ? 'disableSelection' : ''} ${this.isDisablePreSelectedValues(option) ? 'disableSelection' : ''}`}
 							onClick={() => this.onSelectItem(option)}
 						>
 							{showCheckbox && !singleSelect && (
@@ -409,7 +407,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
                     type="checkbox"
                     className={'checkbox'}
                     readOnly
-                    checked={this.isSelectedValue(option)}
+                    checked={isSelected}
                   />
 							)}
 							{isObject ? option[displayValue] : (option || '').toString()}
@@ -423,15 +421,13 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   renderNormalOption() {
     const { isObject = false, displayValue, showCheckbox, style, singleSelect } = this.props;
     const { highlightOption } = this.state;
-    return this.state.options.map((option, i) => (
+    return this.state.options.map((option, i) => {
+        const isSelected = this.isSelectedValue(option);
+        return (
           <li
             key={`option${i}`}
             style={style['option']}
-            className={`
-              ${highlightOption === i ? `highlightOption highlight` : ""} 
-              ${this.fadeOutSelection(option) && 'disableSelection'} 
-              ${this.isDisablePreSelectedValues(option) && 'disableSelection'} option
-            `}
+            className={`option ${isSelected ? 'selected' : ''} ${highlightOption === i ? `highlightOption highlight` : ""} ${this.fadeOutSelection(option) ? 'disableSelection' : ''} ${this.isDisablePreSelectedValues(option) ? 'disableSelection' : ''}`}
             onClick={() => this.onSelectItem(option)}
           >
             {showCheckbox && !singleSelect && (
@@ -439,12 +435,13 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
                 type="checkbox"
                 readOnly
                 className={`checkbox`}
-                checked={this.isSelectedValue(option)}
+                checked={isSelected}
               />
             )}
             {isObject ? option[displayValue] : (option || '').toString()}
           </li>
-    ));
+      )
+    });
   }
 
   renderSelectedList() {
