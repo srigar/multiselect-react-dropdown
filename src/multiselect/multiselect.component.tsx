@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "./styles.css";
 import CloseCircle from '../assets/svg/closeCircle.svg';
 import CloseCircleDark from '../assets/svg/closeCircleDark.svg';
@@ -14,6 +14,30 @@ const closeIconTypes = {
   close: CloseSquare,
   cancel: CloseLine
 };
+
+function useOutsideAlerter(ref, clickEvent) {
+  useEffect(() => {
+      function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            clickEvent();
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+      };
+  }, [ref]);
+}
+
+/**
+* Component that alerts if you click outside of it
+*/
+function OutsideAlerter(props) {
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef, props.outsideClick);
+  return <div ref={wrapperRef}>{props.children}</div>;
+}
 
 export class Multiselect extends React.Component<IMultiselectProps, any> {
   static defaultProps: { options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void;onKeyPressFn: ()=>void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
@@ -61,6 +85,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.getSelectedItems = this.getSelectedItems.bind(this);
     this.getSelectedItemsCount = this.getSelectedItemsCount.bind(this);
     this.hideOnClickOutside = this.hideOnClickOutside.bind(this);
+    this.onCloseOptionList = this.onCloseOptionList.bind(this);
     this.isVisible = this.isVisible.bind(this);
   }
 
@@ -483,6 +508,13 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     });
   }
 
+  onCloseOptionList() {
+    this.setState({
+      toggleOptionsList: false,
+      highlightOption: this.props.avoidHighlightFirstOption ? -1 : 0
+    });
+  }
+
   onFocus(){
     if (this.state.toggleOptionsList) {
       // @ts-ignore
@@ -494,7 +526,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 
   onBlur(){
     // @ts-ignore
-    this.optionTimeout = setTimeout(this.toggelOptionList, 250);
+    this.optionTimeout = setTimeout(this.onCloseOptionList, 250);
   }
 
   isVisible(elem) {
@@ -557,7 +589,11 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   render() {
-    return this.renderMultiselectContainer();
+    return (
+      <OutsideAlerter outsideClick={this.onCloseOptionList}>
+        {this.renderMultiselectContainer()}
+      </OutsideAlerter>
+    );
   }
 }
 
