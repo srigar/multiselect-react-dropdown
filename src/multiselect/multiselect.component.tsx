@@ -216,6 +216,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   onArrowKeyNavigation(e) {
+    e.preventDefault();
     const {
       options,
       highlightOption,
@@ -224,6 +225,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       selectedValues
     } = this.state;
     const { disablePreSelectedValues } = this.props;
+    const optionContainer = this.searchWrapper.current.parentElement.querySelector('.optionContainer');
+    const currentSelectionClientHeight = optionContainer.children[highlightOption] !== undefined ? optionContainer.children[highlightOption].clientHeight : optionContainer.children[0].clientHeight;
     if (e.keyCode === 8 && !inputValue && !disablePreSelectedValues && selectedValues.length) {
       this.onRemoveSelectedItem(selectedValues.length - 1);
     }
@@ -235,6 +238,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
         this.setState(previousState => ({
           highlightOption: previousState.highlightOption - 1
         }));
+        optionContainer.scrollTop = currentSelectionClientHeight * (highlightOption - 1);
       } else {
         this.setState({ highlightOption: options.length - 1 });
       }
@@ -243,6 +247,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
         this.setState(previousState => ({
           highlightOption: previousState.highlightOption + 1
         }));
+        optionContainer.scrollTop = currentSelectionClientHeight * highlightOption;
       } else {
         this.setState({ highlightOption: 0 });
       }
