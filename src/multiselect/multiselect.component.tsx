@@ -40,8 +40,7 @@ function OutsideAlerter(props) {
 }
 
 export class Multiselect extends React.Component<IMultiselectProps, any> {
-  static defaultProps: { customArrow: any; class
-: string; options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void;onKeyPressFn: ()=>void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; name: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
+  static defaultProps: { customArrow: any; className: string; options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void;onKeyPressFn: ()=>void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; name: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
   constructor(props) {
     super(props);
     this.state = {
