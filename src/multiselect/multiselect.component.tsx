@@ -40,7 +40,7 @@ function OutsideAlerter(props) {
 }
 
 export class Multiselect extends React.Component<IMultiselectProps, any> {
-  static defaultProps: { customArrow: any; className: string; options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void;onKeyPressFn: ()=>void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
+  static defaultProps: { customArrow: any; className: string; options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void;onKeyPressFn: ()=>void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; name: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; };
   constructor(props) {
     super(props);
     this.state = {
@@ -544,7 +544,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 
   renderMultiselectContainer() {
     const { inputValue, toggleOptionsList, selectedValues } = this.state;
-    const { placeholder, style, singleSelect, id, hidePlaceholder, disable, showArrow, className, customArrow } = this.props;
+    const { placeholder, style, singleSelect, id, name, hidePlaceholder, disable, showArrow, className, customArrow } = this.props;
     return (
       <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''} ${className || ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`}
@@ -557,6 +557,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 						ref={this.searchBox}
             className="searchBox"
             id={`${id || 'search'}_input`}
+	    name={`${name || 'search_name'}_input`}
             onChange={this.onChange}
             onKeyPress={this.onKeyPress}
             value={inputValue}
@@ -616,6 +617,7 @@ Multiselect.defaultProps = {
   singleSelect: false,
   caseSensitiveSearch: false,
   id: '',
+  name: '',
   closeOnSelect: true,
   avoidHighlightFirstOption: false,
   hidePlaceholder: false,
