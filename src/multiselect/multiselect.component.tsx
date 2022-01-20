@@ -42,7 +42,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     // @ts-ignore
 		this.searchBox = React.createRef();
     this.optionListContainer = React.createRef();
-    this.observer = new IntersectionObserver((entries, observer) => this.onIntersection(entries, observer));;
+    this.observer = new IntersectionObserver((entries, observer) => this.onIntersection(entries, observer));
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -503,7 +503,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     entries.forEach(entry => {
       const target = entry.target;
 
-      if (target.offsetTop + target.offsetHeight > window.innerHeight) {
+      if (target.getBoundingClientRect().top + target.offsetHeight > window.innerHeight) {
         target.style.bottom = '100%';
       } else {
         target.style.bottom = 'auto';
