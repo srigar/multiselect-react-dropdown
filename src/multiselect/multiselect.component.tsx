@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useCallback } from "react";
 import "./styles.css";
 import CloseCircle from '../assets/svg/closeCircle.svg';
 import CloseCircleDark from '../assets/svg/closeCircleDark.svg';
@@ -41,6 +41,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 		this.searchWrapper = React.createRef();
     // @ts-ignore
 		this.searchBox = React.createRef();
+    this.optionListContainer = React.createRef();
+    this.observer = new IntersectionObserver((entries, observer) => this.onIntersection(entries, observer));;
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -481,7 +483,34 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       toggleOptionsList: !this.state.toggleOptionsList,
       highlightOption: this.props.avoidHighlightFirstOption ? -1 : 0
     });
+
     this.searchWrapper.current.classList.toggle(CLASS_IS_ACTIVE);
+    
+    const optionListContainer = this.optionListContainer.current;
+
+    optionListContainer.style.visibility = 'hidden';
+  }
+
+  connectObserver() {
+    if ('IntersectionObserver' in window === true) {
+      if (this.optionListContainer.current) {
+        this.observer.observe(this.optionListContainer.current);
+      }
+    }
+  }
+
+  onIntersection (entries, observer) {
+    entries.forEach(entry => {
+      const target = entry.target;
+
+      if (target.offsetTop + target.offsetHeight > window.innerHeight) {
+        target.style.bottom = '100%';
+      } else {
+        target.style.bottom = 'auto';
+      }
+    
+      target.style.visibility = 'visible';
+    });
   }
 
   onFocus(){
@@ -554,8 +583,10 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
           className={`optionListContainer ${
             toggleOptionsList ? 'displayBlock' : 'displayNone'
           }`}
+          ref={this.optionListContainer}
         >
           {this.renderOptionList()}
+          {this.connectObserver()}
         </div>
       </div>
     );
