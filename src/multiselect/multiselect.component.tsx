@@ -42,7 +42,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     // @ts-ignore
 		this.searchBox = React.createRef();
     this.optionListContainer = React.createRef();
-    this.observer = new IntersectionObserver((entries, observer) => this.onIntersection(entries, observer));
+    this.observer = ('IntersectionObserver' in window ? new IntersectionObserver((entries, observer) => this.onIntersection(entries, observer)) : null);
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -488,14 +488,14 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     
     const optionListContainer = this.optionListContainer.current;
 
-    optionListContainer.style.visibility = 'hidden';
+    if (this.observer) optionListContainer.style.visibility = 'hidden';
   }
 
   connectObserver() {
-    if ('IntersectionObserver' in window === true) {
-      if (this.optionListContainer.current) {
-        this.observer.observe(this.optionListContainer.current);
-      }
+    if (!this.observer) return;
+    
+    if (this.optionListContainer.current) {
+      this.observer.observe(this.optionListContainer.current);
     }
   }
 
