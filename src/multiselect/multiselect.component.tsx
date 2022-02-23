@@ -523,7 +523,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   onBlur(){
-    this.setState({ inputValue: '' });
+    this.setState({ inputValue: '' }, this.filterOptionsByInput);
     // @ts-ignore
     this.optionTimeout = setTimeout(this.onCloseOptionList, 250);
   }
