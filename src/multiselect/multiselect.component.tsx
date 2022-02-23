@@ -391,28 +391,30 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     const { isObject = false, displayValue, showCheckbox, style, singleSelect } = this.props;
     const { groupedObject } = this.state;
     return Object.keys(groupedObject).map(obj => {
-      const isSelected = this.isSelectedValue(option);
 			return (
 				<React.Fragment key={obj}>
 					<li className="groupHeading" style={style['groupHeading']}>{obj}</li>
-					{groupedObject[obj].map((option, i) => (
-						<li
-							key={`option${i}`}
-							style={style['option']}
-              className={`groupChildEle option ${isSelected ? 'selected' : ''} ${this.fadeOutSelection(option) ? 'disableSelection' : ''} ${this.isDisablePreSelectedValues(option) ? 'disableSelection' : ''}`}
-							onClick={() => this.onSelectItem(option)}
-						>
-							{showCheckbox && !singleSelect && (
-                  <input
-                    type="checkbox"
-                    className={'checkbox'}
-                    readOnly
-                    checked={isSelected}
-                  />
-							)}
-							{isObject ? option[displayValue] : (option || '').toString()}
-						</li>
-					))}
+					{groupedObject[obj].map((option, i) => {
+            const isSelected = this.isSelectedValue(option);
+            return (
+              <li
+                key={`option${i}`}
+                style={style['option']}
+                className={`groupChildEle option ${isSelected ? 'selected' : ''} ${this.fadeOutSelection(option) ? 'disableSelection' : ''} ${this.isDisablePreSelectedValues(option) ? 'disableSelection' : ''}`}
+                onClick={() => this.onSelectItem(option)}
+              >
+                {showCheckbox && !singleSelect && (
+                    <input
+                      type="checkbox"
+                      className={'checkbox'}
+                      readOnly
+                      checked={isSelected}
+                    />
+                )}
+                {isObject ? option[displayValue] : (option || '').toString()}
+              </li>
+            )}
+          )}
 				</React.Fragment>
 			)
 		});
