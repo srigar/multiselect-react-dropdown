@@ -557,9 +557,9 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
           <input
 						type="text"
 						ref={this.searchBox}
-            className="searchBox"
+            className={`searchBox ${singleSelect && selectedValues.length ? 'display-none' : ''}`}
             id={`${id || 'search'}_input`}
-	    name={`${name || 'search_name'}_input`}
+	          name={`${name || 'search_name'}_input`}
             onChange={this.onChange}
             onKeyPress={this.onKeyPress}
             value={inputValue}
