@@ -522,9 +522,15 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     }
   }
 
-  onBlur(){
+  /*
+   * NOTE:
+   * The onBlur event applies to the search box input. In Webkit browsers, this handler causes the menu to close on using the mouse/scrollbar to scroll the list of options.
+   * As current use cases of this control do not implement the search feature, the blur handler is being intentionally disabled as a workaround for the described issue.
+   */
+
+  onBlur(e){
     // @ts-ignore
-    this.optionTimeout = setTimeout(this.toggleOptionList, 250);
+    {/* this.optionTimeout = setTimeout(this.toggleOptionList, 250); */}
   }
 
   onSelectOrClick(){
