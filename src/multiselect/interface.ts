@@ -30,4 +30,6 @@ export interface IMultiselectProps {
     customArrow?: any;
     disable?: boolean;
     className?: string;
+    selectedValueDecorator: (v:string) => React.ReactNode | string;
+    optionValueDecorator: (v:string) => string
 }

@@ -40,6 +40,21 @@ ArrrayOfObjects.args = {
   displayValue: 'key'
 };
 
+export const SelectedValueDecorator = Template.bind({});
+SelectedValueDecorator.args = {
+  options: [{key: "Option 0 is extremely long and therefore should probably be shortened once selected as a value", cat: "Group 1"},...options],
+  selectedValueDecorator: v => v.length > 15 ? `${v.substring(0,15)}...` : v,
+  displayValue: 'key'
+} as IMultiselectProps;
+
+export const OptionValueDecorator = Template.bind({});
+OptionValueDecorator.args = {
+  options,
+  optionValueDecorator: v => v.toUpperCase(),
+  displayValue: 'key'
+} as IMultiselectProps;
+
+
 export const PreselectedValues = Template.bind({});
 PreselectedValues.args = {
   options,
