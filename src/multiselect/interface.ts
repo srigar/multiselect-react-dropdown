@@ -30,4 +30,5 @@ export interface IMultiselectProps {
     customArrow?: any;
     disable?: boolean;
     className?: string;
+    hideSelectedList?: boolean
 }

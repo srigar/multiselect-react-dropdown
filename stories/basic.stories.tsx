@@ -62,6 +62,14 @@ ShowCheckbox.args = {
   showCheckbox: true
 };
 
+export const HideSelectedList = Template.bind({});
+HideSelectedList.args = {
+  options,
+  displayValue: 'key',
+  showCheckbox: true,
+  hideSelectedList: true
+};
+
 export const Grouping = Template.bind({});
 Grouping.args = {
   options,
