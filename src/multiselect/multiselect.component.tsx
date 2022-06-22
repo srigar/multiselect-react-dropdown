@@ -411,7 +411,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
                       checked={isSelected}
                     />
                 )}
-                {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString())}
+                {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString(), option)}
               </li>
             )}
           )}
@@ -440,7 +440,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
                 checked={isSelected}
               />
             )}
-            {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString())}
+            {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString(), option)}
           </li>
       )
     });
@@ -451,7 +451,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     const { selectedValues, closeIconType } = this.state;
     return selectedValues.map((value, index) => (
       <span className={`chip  ${singleSelect && 'singleChip'} ${this.isDisablePreSelectedValues(value) && 'disableSelection'}`} key={index} style={style['chips']}>
-        {this.props.selectedValueDecorator(!isObject ? (value || '').toString() : value[displayValue])}
+        {this.props.selectedValueDecorator(!isObject ? (value || '').toString() : value[displayValue], value)}
         {!this.isDisablePreSelectedValues(value) && (!customCloseIcon ? <img
           className="icon_cancel closeIcon"
           src={closeIconType}
