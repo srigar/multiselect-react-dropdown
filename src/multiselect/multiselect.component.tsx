@@ -40,7 +40,7 @@ function OutsideAlerter(props) {
 }
 
 export class Multiselect extends React.Component<IMultiselectProps, any> {
-  static defaultProps: { customArrow: any; className: string; options: never[]; disablePreSelectedValues: boolean; selectedValues: never[]; isObject: boolean; displayValue: string; showCheckbox: boolean; selectionLimit: number; placeholder: string; groupBy: string; style: {}; emptyRecordMsg: string; onSelect: () => void; onRemove: () => void;onKeyPressFn: ()=>void; closeIcon: string; singleSelect: boolean; caseSensitiveSearch: boolean; id: string; name: string; closeOnSelect: boolean; avoidHighlightFirstOption: boolean; hidePlaceholder: boolean; showArrow: boolean; keepSearchTerm: boolean; disable: boolean };
+  static defaultProps: IMultiselectProps;
   constructor(props) {
     super(props);
     this.state = {
@@ -411,7 +411,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
                       checked={isSelected}
                     />
                 )}
-                {isObject ? option[displayValue] : (option || '').toString()}
+                {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString())}
               </li>
             )}
           )}
@@ -440,7 +440,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
                 checked={isSelected}
               />
             )}
-            {isObject ? option[displayValue] : (option || '').toString()}
+            {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString())}
           </li>
       )
     });
@@ -451,7 +451,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     const { selectedValues, closeIconType } = this.state;
     return selectedValues.map((value, index) => (
       <span className={`chip  ${singleSelect && 'singleChip'} ${this.isDisablePreSelectedValues(value) && 'disableSelection'}`} key={index} style={style['chips']}>
-        {!isObject ? (value || '').toString() : value[displayValue]}
+        {this.props.selectedValueDecorator(!isObject ? (value || '').toString() : value[displayValue])}
         {!this.isDisablePreSelectedValues(value) && (!customCloseIcon ? <img
           className="icon_cancel closeIcon"
           src={closeIconType}
@@ -627,5 +627,7 @@ Multiselect.defaultProps = {
   keepSearchTerm: false,
   customCloseIcon: '',
   className: '',
-  customArrow: undefined
-};
+  customArrow: undefined,
+  selectedValueDecorator: v => v,
+  optionValueDecorator: v => v
+} as IMultiselectProps;

@@ -97,6 +97,8 @@ onRemove(selectedList, removedItem) {
 | `customArrow` | `any` | `undefined` | For multiselect dropdown custom arrow option
 | `keepSearchTerm` | `bool` | `false` | Whether or not to keep the search value after selecting or removing an item
 | `customCloseIcon` | `ReactNode or string` | `undefined` | Custom close icon and can be string or react component(Check demo for reference)
+| `selectedValueDecorator` | `(string) => ReactNode \| string` | `v => v` | A function that can be used to modify the representation selected value
+| `optionValueDecorator` | `(string) => string` | `v => v` | A function that can be used to modify the representation the available options
 ----
 
 
