@@ -1,0 +1,5 @@
+theme: jekyll-theme-cayman
+name: Srigar Sukumar
+url: https://srigar.github.io/multiselect-react-dropdown/
+plugins:
+  - jekyll-seo-tag

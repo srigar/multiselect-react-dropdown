@@ -1,0 +1,132 @@
+.multiSelectContainer {
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+.disable_ms {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.searchWrapper {
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 5px;
+  min-height: 22px;
+  position: relative;
+}
+.multiSelectContainer input {
+  border: none;
+  margin-top: 3px;
+  background: transparent;
+}
+.multiSelectContainer input:focus {
+  outline: none;
+}
+.bgSelected{
+  background-color: rgb(242, 242, 252)!important;
+}
+.chip {
+  padding: 4px 10px;
+  background: rgb(242, 242, 252);
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+}
+.singleChip {
+  background: none;
+  border-radius: none;
+  color: inherit;
+  white-space: nowrap;
+}
+.singleChip i {
+  display: none;
+}
+.closeIcon {
+  font-size: 12px;
+  float: right;
+  margin-left: 2px;
+  cursor: pointer;
+}
+.optionListContainer {
+  position: absolute;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  margin-top: 1px;
+  z-index: 2;
+}
+.multiSelectContainer ul {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.multiSelectContainer li {
+  padding: 10px 10px;
+}
+.multiSelectContainer li:hover {
+  background: rgb(242, 242, 252);
+  color: #fff;
+  cursor: pointer;
+}
+.checkbox {
+  margin-right: 10px;
+}
+.disableSelection {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.highlightOption {
+  background: rgb(242, 242, 252);
+  color: #ffffff;
+}
+.displayBlock {
+  display: block;
+}
+.displayNone {
+  display: none;
+}
+.notFound {
+  padding: 10px;
+  display: block;
+}
+.singleSelect {
+  padding-right: 20px;
+}
+li.groupHeading {
+  color: #908e8e;
+  pointer-events: none;
+  padding: 5px 15px;
+}
+li.groupChildEle {
+  padding-left: 30px;
+}
+.icon_cancel_circled:before {
+  content: "\e800";
+}
+.icon_cancel:before {
+  content: "\e801";
+}
+.icon_cancel_circled2:before {
+  content: "\e802";
+}
+.icon_window_close:before {
+  content: "\f2d3";
+}
+.icon_down_dir {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.icon_down_dir:before { 
+  content: '\e803'; 
+}
