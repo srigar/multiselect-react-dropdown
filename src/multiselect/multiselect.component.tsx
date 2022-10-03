@@ -554,8 +554,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
           onClick={singleSelect ? this.toggelOptionList : () => {}}
         >
           {!hideSelectedList && this.renderSelectedList()}
-          <input
-						type="text"
+          <textarea
 						ref={this.searchBox}
             className={`searchBox ${singleSelect && selectedValues.length ? 'display-none' : ''}`}
             id={`${id || 'search'}_input`}
