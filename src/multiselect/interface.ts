@@ -10,6 +10,7 @@ export interface IMultiselectProps {
     selectionLimit?: any,
     placeholder?: string,
     groupBy?: string,
+    showGroupByCheckbox?: boolean,
     loading?: boolean,
     style?: object,
     emptyRecordMsg?: string,
