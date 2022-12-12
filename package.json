@@ -11,7 +11,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "author": "ww",
+  "author": "Srigar Sukumar, Willow Wagner - Contributor",
   "license": "MIT",
   "homepage": "https://multiselect-react-dropdown.vercel.app/?path=/docs/multiselect-dropdown--flat-array",
   "repository": {

@@ -16,8 +16,6 @@ module.exports = {
     },
     compress: true,
     port: 7000,
-    //watchContentBase: true,
-    //progress: true
   },
   mode: "production",
   devtool: 'source-map',
@@ -36,17 +34,11 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      // { 
-      //   test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
-      //   loader: 'url-loader?limit=100000' 
-      // }
+      },      
     ]
   },
   optimization: {
-    minimizer: [
-      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-       //`...`,
+    minimizer: [      
       new CssMinimizerPlugin(),      
       new TerserPlugin()
     ],
