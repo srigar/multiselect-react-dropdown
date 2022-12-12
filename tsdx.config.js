@@ -10,17 +10,17 @@ module.exports = {
       })
     );
     config.plugins = [
-      svgr({
-        // configure however you like, this is just an example
-        ref: true,
-        memo: true,
-        svgoConfig: {
-          plugins: [
-            { removeViewBox: false },
-            { removeAttrs: { attrs: 'g:(stroke|fill):((?!^none$).)*' } }
-          ],
-        },
-      }),
+      // svgr({
+      //   // configure however you like, this is just an example
+      //   ref: true,
+      //   memo: true,
+      //   svgoConfig: {
+      //     plugins: [
+      //       { removeViewBox: false },
+      //       { removeAttrs: { attrs: 'g:(stroke|fill):((?!^none$).)*' } }
+      //     ],
+      //   },
+      // }),
       // Force the `url` plugin to emit files.
       url({ include: ['**/*.ttf', '**/*.woff', '**/*.eot', '**/*.svg'] }),
       ...config.plugins,
