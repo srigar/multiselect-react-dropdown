@@ -6,7 +6,7 @@ import CloseCircleDark from '../assets/svg/closeCircleDark.svg';
 import CloseLine from '../assets/svg/closeLine.svg';
 import CloseSquare from '../assets/svg/closeSquare.svg';
 import DownArrow from '../assets/svg/downArrow.svg';
-import {IMultiselectProps} from "./interface";
+import { IMultiselectProps } from "./interface";
 
 const closeIconTypes = {
   circle: CloseCircleDark,
@@ -17,16 +17,16 @@ const closeIconTypes = {
 
 function useOutsideAlerter(ref, clickEvent) {
   useEffect(() => {
-      function handleClickOutside(event) {
-          if (ref.current && !ref.current.contains(event.target)) {
-            clickEvent();
-          }
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        clickEvent();
       }
+    }
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-      };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [ref]);
 }
 
@@ -52,7 +52,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       preSelectedValues: Object.assign([], props.selectedValues),
       toggleOptionsList: false,
       highlightOption: props.avoidHighlightFirstOption ? -1 : 0,
-			showCheckbox: props.showCheckbox,
+      showCheckbox: props.showCheckbox,
+      showGroupByCheckbox: props.showGroupByCheckbox,
       keepSearchTerm: props.keepSearchTerm,
       groupedObject: [],
       closeIconType: closeIconTypes[props.closeIcon] || closeIconTypes['circle']
@@ -60,9 +61,9 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     // @ts-ignore
     this.optionTimeout = null;
     // @ts-ignore
-		this.searchWrapper = React.createRef();
+    this.searchWrapper = React.createRef();
     // @ts-ignore
-		this.searchBox = React.createRef();
+    this.searchBox = React.createRef();
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onFocus = this.onFocus.bind(this);
@@ -75,6 +76,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.onSelectItem = this.onSelectItem.bind(this);
     this.filterOptionsByInput = this.filterOptionsByInput.bind(this);
     this.removeSelectedValuesFromOptions = this.removeSelectedValuesFromOptions.bind(this);
+    this.isGroupSelectedValue = this.isGroupSelectedValue.bind(this);
     this.isSelectedValue = this.isSelectedValue.bind(this);
     this.fadeOutSelection = this.fadeOutSelection.bind(this);
     this.isDisablePreSelectedValues = this.isDisablePreSelectedValues.bind(this);
@@ -91,16 +93,16 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 
   initialSetValue() {
     const { showCheckbox, groupBy, singleSelect } = this.props;
-		const { options } = this.state;
+    const { options } = this.state;
     if (!showCheckbox && !singleSelect) {
       this.removeSelectedValuesFromOptions(false);
-		}
+    }
     // if (singleSelect) {
     //   this.hideOnClickOutside();
     // }
-		if (groupBy) {
-			this.groupByOptions(options);
-		}
+    if (groupBy) {
+      this.groupByOptions(options);
+    }
   }
 
   resetSelectedValues() {
@@ -128,7 +130,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   componentDidMount() {
-		this.initialSetValue();
+    this.initialSetValue();
     // @ts-ignore
     this.searchWrapper.current.addEventListener("click", this.listenerCallback);
   }
@@ -198,7 +200,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 
   groupByOptions(options) {
     const { groupBy } = this.props;
-    const groupedObject = options.reduce(function(r, a) {
+    const groupedObject = options.reduce(function (r, a) {
       const key = a[groupBy] || "Others";
       r[key] = r[key] || [];
       r[key].push(a);
@@ -222,7 +224,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   onKeyPress(event) {
     const { onKeyPressFn } = this.props;
     if (onKeyPressFn) {
-        onKeyPressFn(event, event.target.value);
+      onKeyPressFn(event, event.target.value);
     }
   }
 
@@ -295,8 +297,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   onRemoveSelectedItem(item) {
-		let { selectedValues, index = 0 } = this.state;
-		const { onRemove, showCheckbox, displayValue, isObject } = this.props;
+    let { selectedValues, index = 0 } = this.state;
+    const { onRemove, showCheckbox, displayValue, isObject } = this.props;
     if (isObject) {
       index = selectedValues.findIndex(
         i => i[displayValue] === item[displayValue]
@@ -304,11 +306,11 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     } else {
       index = selectedValues.indexOf(item);
     }
-		selectedValues.splice(index, 1);
-		onRemove(selectedValues, item);
+    selectedValues.splice(index, 1);
+    onRemove(selectedValues, item);
     this.setState({ selectedValues }, () => {
       if (!showCheckbox) {
-				this.removeSelectedValuesFromOptions(true);
+        this.removeSelectedValuesFromOptions(true);
       }
     });
     if (!this.props.closeOnSelect) {
@@ -320,7 +322,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   onSelectItem(item) {
     const { selectedValues } = this.state;
     const { selectionLimit, onSelect, singleSelect, showCheckbox } = this.props;
-    if (!this.state.keepSearchTerm){
+    if (!this.state.keepSearchTerm) {
       this.setState({
         inputValue: ''
       });
@@ -337,11 +339,11 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     if (selectionLimit == selectedValues.length) {
       return;
     }
-		selectedValues.push(item);
-		onSelect(selectedValues, item);
+    selectedValues.push(item);
+    onSelect(selectedValues, item);
     this.setState({ selectedValues }, () => {
       if (!showCheckbox) {
-				this.removeSelectedValuesFromOptions(true);
+        this.removeSelectedValuesFromOptions(true);
       } else {
         this.filterOptionsByInput();
       }
@@ -356,6 +358,35 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     this.setState({ selectedValues: [item], toggleOptionsList: false });
   }
 
+  onGroupSelectItem(item) {
+   
+    let { options, filteredOptions, inputValue } = this.state;
+    const { selectedValues } = this.state;
+    const { showGroupByCheckbox, groupBy, onSelect } = this.props;
+    const groupedSelectedItems = filteredOptions.filter(i => this.matchValues(i[groupBy], item));
+
+    const { filtered, toAdd } = selectedValues?.reduce((acc, curr) => {
+      const index = acc.toAdd.findIndex(v => v === curr);
+      index === -1 ? acc.filtered.push(curr) : acc.toAdd.splice(index, 1);
+      return acc;
+    }, { filtered: [], toAdd: [...groupedSelectedItems] });
+
+    const finalGroupSelected = [...filtered, ...toAdd];
+    selectedValues.splice(0, selectedValues.length, ...finalGroupSelected);
+    onSelect(selectedValues, item);
+    this.setState({ selectedValues }, () => {
+      if (!showGroupByCheckbox) {
+        this.removeSelectedValuesFromOptions(true);
+      } else {
+        this.filterOptionsByInput();
+      }
+    });
+    if (!this.props.closeOnSelect) {
+      // @ts-ignore
+      this.searchBox.current.focus();
+    }
+  }
+
   isSelectedValue(item) {
     const { isObject, displayValue } = this.props;
     const { selectedValues } = this.state;
@@ -366,6 +397,18 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       );
     }
     return selectedValues.filter(i => i === item).length > 0;
+  }
+
+  isGroupSelectedValue(obj) {
+    const { isObject, groupBy } = this.props;
+    const { selectedValues } = this.state;
+    if (isObject) {
+      return (
+        selectedValues.filter(i => i[groupBy] === obj)
+          .length > 0
+      );
+    }
+    return selectedValues.filter(i => i[groupBy] === obj).length > 0;
   }
 
   renderOptionList() {
@@ -388,60 +431,78 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   renderGroupByOptions() {
-    const { isObject = false, displayValue, showCheckbox, style, singleSelect } = this.props;
+    const { isObject = false, displayValue, showCheckbox, style, singleSelect, showGroupByCheckbox } = this.props;
     const { groupedObject } = this.state;
     return Object.keys(groupedObject).map(obj => {
-			return (
-				<React.Fragment key={obj}>
-					<li className="groupHeading" style={style['groupHeading']}>{obj}</li>
-					{groupedObject[obj].map((option, i) => {
+      const isGroupSelected = this.isGroupSelectedValue(obj);
+      return (
+        <React.Fragment key={obj}>
+          <li
+            className={showGroupByCheckbox ? `option ${isGroupSelected ? 'selected' : ''}` : 'groupHeading'}
+            style={style['option']}
+            onClick={(e) => this.onGroupSelectItem(obj, e)}>
+            {showGroupByCheckbox && (
+              <input
+                type="checkbox"
+                className={'checkbox'}
+                readOnly
+                checked={isGroupSelected}
+              />
+            )}{obj}</li>
+          {groupedObject[obj].map((option, i) => {
             const isSelected = this.isSelectedValue(option);
             return (
               <li
                 key={`option${i}`}
                 style={style['option']}
-                className={`groupChildEle option ${isSelected ? 'selected' : ''} ${this.fadeOutSelection(option) ? 'disableSelection' : ''} ${this.isDisablePreSelectedValues(option) ? 'disableSelection' : ''}`}
+                className={`groupChildEle option ${isSelected ? 'selected' : ''} 
+                ${this.fadeOutSelection(option) ? 'disableSelection' : ''} 
+                ${this.isDisablePreSelectedValues(option) ? 'disableSelection' : ''}`}
                 onClick={() => this.onSelectItem(option)}
               >
                 {showCheckbox && !singleSelect && (
-                    <input
-                      type="checkbox"
-                      className={'checkbox'}
-                      readOnly
-                      checked={isSelected}
-                    />
+                  <input
+                    type="checkbox"
+                    className={'checkbox'}
+                    readOnly
+                    checked={isSelected}
+                  />
                 )}
                 {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString(), option)}
               </li>
-            )}
+            )
+          }
           )}
-				</React.Fragment>
-			)
-		});
+        </React.Fragment>
+      )
+    });
   }
 
   renderNormalOption() {
     const { isObject = false, displayValue, showCheckbox, style, singleSelect } = this.props;
     const { highlightOption } = this.state;
     return this.state.options.map((option, i) => {
-        const isSelected = this.isSelectedValue(option);
-        return (
-          <li
-            key={`option${i}`}
-            style={style['option']}
-            className={`option ${isSelected ? 'selected' : ''} ${highlightOption === i ? `highlightOption highlight` : ""} ${this.fadeOutSelection(option) ? 'disableSelection' : ''} ${this.isDisablePreSelectedValues(option) ? 'disableSelection' : ''}`}
-            onClick={() => this.onSelectItem(option)}
-          >
-            {showCheckbox && !singleSelect && (
-              <input
-                type="checkbox"
-                readOnly
-                className={`checkbox`}
-                checked={isSelected}
-              />
-            )}
-            {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString(), option)}
-          </li>
+      const isSelected = this.isSelectedValue(option);
+      return (
+        <li
+          key={`option${i}`}
+          style={style['option']}
+          className={`option ${isSelected ? 'selected' : ''} 
+            ${highlightOption === i ? `highlightOption highlight` : ""} 
+            ${this.fadeOutSelection(option) ? 'disableSelection' : ''} 
+            ${this.isDisablePreSelectedValues(option) ? 'disableSelection' : ''}`}
+          onClick={() => this.onSelectItem(option)}
+        >
+          {showCheckbox && !singleSelect && (
+            <input
+              type="checkbox"
+              readOnly
+              className={`checkbox`}
+              checked={isSelected}
+            />
+          )}
+          {this.props.optionValueDecorator(isObject ? option[displayValue] : (option || '').toString(), option)}
+        </li>
       )
     });
   }
@@ -450,7 +511,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     const { isObject = false, displayValue, style, singleSelect, customCloseIcon } = this.props;
     const { selectedValues, closeIconType } = this.state;
     return selectedValues.map((value, index) => (
-      <span className={`chip  ${singleSelect && 'singleChip'} ${this.isDisablePreSelectedValues(value) && 'disableSelection'}`} key={index} style={style['chips']}>
+      <span className={`chip  ${singleSelect && 'singleChip'}
+       ${this.isDisablePreSelectedValues(value) && 'disableSelection'}`} key={index} style={style['chips']}>
         {this.props.selectedValueDecorator(!isObject ? (value || '').toString() : value[displayValue], value)}
         {!this.isDisablePreSelectedValues(value) && (!customCloseIcon ? <img
           className="icon_cancel closeIcon"
@@ -515,7 +577,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     });
   }
 
-  onFocus(){
+  onFocus() {
     if (this.state.toggleOptionsList) {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
@@ -524,22 +586,22 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     }
   }
 
-  onBlur(){
+  onBlur() {
     this.setState({ inputValue: '' }, this.filterOptionsByInput);
     // @ts-ignore
     this.optionTimeout = setTimeout(this.onCloseOptionList, 250);
   }
 
   isVisible(elem) {
-    return !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
+    return !!elem && !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length)
   }
 
   hideOnClickOutside() {
     const element = document.getElementsByClassName('multiselect-container')[0];
     const outsideClickListener = event => {
-        if (element && !element.contains(event.target) && this.isVisible(element)) {
-          this.toggelOptionList();
-        }
+      if (element && !element.contains(event.target) && this.isVisible(element)) {
+        this.toggelOptionList();
+      }
     }
     document.addEventListener('click', outsideClickListener)
   }
@@ -551,15 +613,15 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''} ${className || ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`}
           ref={this.searchWrapper} style={style['searchBox']}
-          onClick={singleSelect ? this.toggelOptionList : () => {}}
+          onClick={singleSelect ? this.toggelOptionList : () => { }}
         >
           {!hideSelectedList && this.renderSelectedList()}
           <input
-						type="text"
-						ref={this.searchBox}
+            type="text"
+            ref={this.searchBox}
             className={`searchBox ${singleSelect && selectedValues.length ? 'display-none' : ''}`}
             id={`${id || 'search'}_input`}
-	          name={`${name || 'search_name'}_input`}
+            name={`${name || 'search_name'}_input`}
             onChange={this.onChange}
             onKeyPress={this.onKeyPress}
             value={inputValue}
@@ -578,9 +640,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
           )}
         </div>
         <div
-          className={`optionListContainer ${
-            toggleOptionsList ? 'displayBlock' : 'displayNone'
-          }`}
+          className={`optionListContainer ${toggleOptionsList ? 'displayBlock' : 'displayNone'
+            }`}
           onMouseDown={(e) => {
             e.preventDefault();
           }}
@@ -609,12 +670,13 @@ Multiselect.defaultProps = {
   showCheckbox: false,
   selectionLimit: -1,
   placeholder: "Select",
-	groupBy: "",
-	style: {},
-	emptyRecordMsg: "No Options Available",
-	onSelect: () => {},
-  onRemove: () => {},
-  onKeyPressFn: () => {},
+  groupBy: "",
+  showGroupByCheckbox: false,
+  style: {},
+  emptyRecordMsg: "No Options Available",
+  onSelect: () => { },
+  onRemove: () => { },
+  onKeyPressFn: () => { },
   closeIcon: 'circle2',
   singleSelect: false,
   caseSensitiveSearch: false,

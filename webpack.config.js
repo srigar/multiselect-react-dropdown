@@ -1,7 +1,7 @@
 const path = require("path");
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: "./src/multiselect/multiselect.component.js",
@@ -11,11 +11,11 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
     compress: true,
     port: 7000,
-    watchContentBase: true,
-    progress: true
   },
   mode: "production",
   devtool: 'source-map',
@@ -34,22 +34,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      { 
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
-        loader: 'url-loader?limit=100000' 
-      }
+      },      
     ]
   },
   optimization: {
-    minimizer: [
-      new CssMinimizerPlugin({
-        sourceMap: false
-      }),
-      new TerserPlugin({
-        sourceMap: true
-      })
-    ]
+    minimizer: [      
+      new CssMinimizerPlugin(),      
+      new TerserPlugin()
+    ],
   },
   externals: {
     'react': 'commonjs react'

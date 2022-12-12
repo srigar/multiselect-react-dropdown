@@ -81,6 +81,7 @@ onRemove(selectedList, removedItem) {
 | `displayValue` | `string` | `value` | Property name in the object to display in the dropdown. Refer `Basic Usage` section
 | `emptyRecordMsg` | `string` | `No options available` | Message to display when no records found
 | `groupBy` | `string` | `''` | Group the popup list items with the corresponding category by the property name in the object
+| `showGroupByCheckbox` | `bool` | `false` | To display group checkbox option in the dropdown to select child items
 | `closeIcon` | `string` | `circle` | Option to select close icon instead of default. Refer `Close Icon` section
 | `style` | `object` | `{}` | CSS Customization for multiselect. Refer below object for css customization.
 | `caseSensitiveSearch` | `bool` | `false` | Enables case sensitivity on the search field.
