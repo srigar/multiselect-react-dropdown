@@ -157,7 +157,7 @@ ref={this.multiselectRef}
   option: { // To change css for dropdown options
 	color: blue;
   },
-  groupHeading: { // To chanage group heading style
+  groupHeading: { // To change group heading style
 	....
   }
 }
